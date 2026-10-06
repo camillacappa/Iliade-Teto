@@ -1,0 +1,1623 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Iliade">
+<meta name="theme-color" content="#B9562A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%23B9562A%27/%3E%3Cpath d=%27M24 78V52a26 26 0 0 1 52 0v26H62V58H38v20z%27 fill=%27%23F3D27A%27/%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>L'Iliade di Teto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Lexend:wght@400;500;700&display=swap">
+<style>
+/* Layout: una "tavoletta" centrale da iPad; carte come piastrelle di vaso greco con fregio a meandro nel colore della squadra */
+:root{
+  --bg:#ECEFF0;        /* marmo */
+  --paper:#FFFFFF;
+  --ink:#1F1B18;       /* vernice nera dei vasi */
+  --muted:#5D646B;
+  --line:#D3D9DC;
+  --clay:#B9562A;      /* terracotta del vaso: accento */
+  --clay-soft:#F6E4D8;
+  --sea:#2A5B7B;       /* Greci */
+  --troy:#8C2C3B;      /* Troiani */
+  --gold:#9A7020;      /* Dèi */
+  --olive:#56664E;     /* Altri personaggi */
+  --stone:#6B6158;     /* Luoghi e oggetti */
+  --ok:#2F7A46; --ok-soft:#E1F1E5;
+  --ko:#B3372B; --ko-soft:#F8E1DD;
+  --skin:#F0C7A0;
+  --land:#E4D9C3; --water:#CBDDE6; --coast:#9C8E76;
+  --display:"Cinzel", "Trajan Pro", Georgia, serif;
+  --body:"Lexend", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#15181B; --paper:#20252A; --ink:#EEE8DF; --muted:#A3AAB1; --line:#343B42;
+  --clay:#E57D46; --clay-soft:#3A2A21; --sea:#73AAD0; --troy:#E07A88; --gold:#E2B65A; --olive:#A3B892; --stone:#BDB1A5;
+  --ok:#6CC488; --ok-soft:#1F3427; --ko:#F0897C; --ko-soft:#3D2522; --skin:#E8BC93; --land:#3A352D; --water:#1A2A34; --coast:#6E6457; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15181B; --paper:#20252A; --ink:#EEE8DF; --muted:#A3AAB1; --line:#343B42;
+  --clay:#E57D46; --clay-soft:#3A2A21; --sea:#73AAD0; --troy:#E07A88; --gold:#E2B65A; --olive:#A3B892; --stone:#BDB1A5;
+  --ok:#6CC488; --ok-soft:#1F3427; --ko:#F0897C; --ko-soft:#3D2522; --skin:#E8BC93; --land:#3A352D; --water:#1A2A34; --coast:#6E6457; color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink); font-family:var(--body); font-size:18px; line-height:1.5; padding-inline:16px; padding-block:12px 60px; -webkit-tap-highlight-color:transparent}
+.wrap{max-width:860px; margin:0 auto; display:flex; flex-direction:column; gap:18px}
+h1,h2,h3{font-family:var(--display); margin:0; line-height:1.15; text-wrap:balance}
+button{font:inherit; color:inherit; cursor:pointer}
+button:focus-visible{outline:3px solid var(--clay); outline-offset:2px}
+.meander{height:10px; background:var(--c,var(--clay)); -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='10'%3E%3Cpath d='M0 9h18V1H4v6h8V4' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") repeat-x; mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='10'%3E%3Cpath d='M0 9h18V1H4v6h8V4' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") repeat-x}
+
+/* Testata */
+.top{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+.brand{display:flex; align-items:center; gap:10px; flex:1 1 auto; min-width:0}
+.brand svg{width:46px; height:46px; flex:none}
+.brand h1{font-size:clamp(22px,4vw,30px); font-weight:800; letter-spacing:.02em}
+.brand h1 span{color:var(--clay)}
+.grade{display:flex; align-items:center; gap:8px; background:var(--paper); border:1px solid var(--line); border-radius:999px; padding:6px 14px 6px 8px; font-size:15px}
+.grade b{font-family:var(--display); font-weight:800; font-size:16px}
+.grade .pts{font-variant-numeric:tabular-nums; color:var(--muted)}
+.grade .dot{width:26px; height:26px; border-radius:50%; background:var(--clay); color:var(--paper); display:grid; place-items:center; font-size:13px; font-weight:700}
+
+.tabs{display:grid; grid-template-columns:repeat(5,1fr); gap:6px; background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:6px}
+.tabs button{border:0; background:transparent; border-radius:11px; padding:10px 4px; font-size:15px; font-weight:500; display:flex; flex-direction:column; align-items:center; gap:2px; color:var(--muted)}
+.tabs button svg{width:22px; height:22px}
+.tabs button[aria-current="true"]{background:var(--clay-soft); color:var(--clay); font-weight:700}
+
+/* Elmo */
+.elmo{display:flex; align-items:flex-end; gap:10px}
+.elmo svg{width:74px; height:74px; flex:none}
+.bubble{background:var(--paper); border:2px solid var(--ink); border-radius:18px 18px 18px 4px; padding:10px 14px; font-size:17px; line-height:1.4; position:relative; min-width:0}
+.bubble .who{display:block; font-family:var(--display); font-weight:800; font-size:13px; letter-spacing:.12em; color:var(--clay)}
+
+/* Capitoli */
+.chap{background:var(--paper); border:1px solid var(--line); border-radius:18px; overflow:hidden; text-align:left; width:100%; padding:0; display:block}
+.chap .meander{--c:var(--clay)}
+.chap .in{padding:16px 18px 18px; display:grid; grid-template-columns:auto 1fr; gap:4px 16px; align-items:center}
+.chap .rom{grid-row:span 3; font-family:var(--display); font-weight:800; font-size:46px; color:var(--clay); line-height:1; min-width:56px; text-align:center}
+.chap h2{font-size:22px}
+.chap .sec{color:var(--muted); font-size:15px}
+.chip{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700; letter-spacing:.04em; padding:3px 10px; border-radius:999px; background:var(--ok-soft); color:var(--ok)}
+.chip.run{background:var(--clay-soft); color:var(--clay)}
+.metaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; font-size:14px; color:var(--muted)}
+.stars{display:inline-flex; gap:1px; color:var(--gold)}
+.stars svg{width:16px; height:16px}
+.stars .off{color:var(--line)}
+
+.sub{display:flex; gap:6px; flex-wrap:wrap}
+.sub button{border:1px solid var(--line); background:var(--paper); border-radius:999px; padding:8px 16px; font-size:16px; font-weight:500}
+.sub button[aria-current="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.back{border:0; background:transparent; color:var(--clay); font-weight:700; padding:4px 0; display:inline-flex; gap:6px; align-items:center; font-size:16px; align-self:flex-start}
+.back svg{width:18px; height:18px}
+.pageHead{display:flex; flex-direction:column; gap:6px}
+.pageHead h2{font-size:clamp(24px,4.4vw,34px)}
+.pageHead p{margin:0; color:var(--muted)}
+
+/* Riassunto */
+.sum{background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:8px 18px 18px}
+.sum h3{font-size:18px; color:var(--clay); padding:14px 0 4px; letter-spacing:.03em}
+.pt{display:grid; grid-template-columns:34px 1fr auto; gap:10px; padding:12px 0; border-top:1px solid var(--line); align-items:start}
+.pt:first-of-type{border-top:0}
+.pt .n{font-family:var(--display); font-weight:800; color:var(--clay); font-size:20px; text-align:center; line-height:1.3}
+.pt p{margin:0; min-width:0}
+.pt .pg{font-size:13px; color:var(--muted); display:block; margin-top:4px}
+.names{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+.name{border:1px solid var(--line); background:var(--bg); border-radius:999px; padding:3px 10px 3px 4px; font-size:14px; display:inline-flex; align-items:center; gap:6px}
+.name i{width:20px; height:20px; border-radius:50%; background:var(--c); display:inline-block}
+.spk{width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:var(--paper); display:grid; place-items:center; flex:none; color:var(--clay)}
+.spk svg{width:22px; height:22px}
+.spk.big{width:52px; height:52px}
+.btnRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+.btn{border:0; border-radius:14px; padding:14px 22px; font-weight:700; font-size:17px; background:var(--clay); color:#fff}
+.btn.ghost{background:var(--paper); color:var(--ink); border:1px solid var(--line)}
+.btn.dark{background:var(--ink); color:var(--paper)}
+
+/* Giochi */
+.games{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px}
+.game{background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:18px; text-align:left; display:flex; flex-direction:column; gap:8px}
+.game .ic{width:48px; height:48px; border-radius:14px; display:grid; place-items:center; background:var(--clay-soft); color:var(--clay)}
+.game .ic svg{width:28px; height:28px}
+.game h3{font-size:20px}
+.game p{margin:0; font-size:15px; color:var(--muted)}
+
+/* Carte */
+.filters{display:flex; gap:6px; flex-wrap:wrap}
+.filters button{border:1px solid var(--line); background:var(--paper); border-radius:999px; padding:6px 14px; font-size:15px}
+.filters button[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px}
+.card{--c:var(--olive); background:var(--paper); border:2px solid var(--c); border-radius:14px; padding:0; overflow:hidden; text-align:left; display:flex; flex-direction:column; position:relative}
+.card .meander{--c:inherit; background:var(--c)}
+.card .face{display:grid; place-items:center; padding:14px 0 6px; color:var(--c)}
+.card .face svg{width:54px; height:54px}
+.card .tx{padding:4px 12px 12px; display:flex; flex-direction:column; gap:2px}
+.card .nm{font-family:var(--display); font-weight:800; font-size:17px; line-height:1.15}
+.card .ch{font-size:13px; color:var(--muted); line-height:1.3}
+.card .tm{font-size:11px; letter-spacing:.1em; text-transform:uppercase; font-weight:700; color:var(--c)}
+.card .won{position:absolute; top:16px; right:8px; color:var(--gold)}
+.card .won svg{width:22px; height:22px}
+.card.minor .face svg{width:42px; height:42px}
+.t-dei{--c:var(--gold)} .t-greci{--c:var(--sea)} .t-troiani{--c:var(--troy)} .t-altri{--c:var(--olive)} .t-oggetto,.t-luogo{--c:var(--stone)}
+.secLabel{font-family:var(--display); font-weight:800; font-size:18px; display:flex; align-items:center; gap:10px}
+.secLabel small{font-family:var(--body); font-weight:500; color:var(--muted); font-size:14px}
+
+/* Modale carta */
+.sheet{position:fixed; inset:0; background:rgba(10,10,10,.5); display:grid; place-items:center; padding:16px; z-index:20}
+.sheet .box{--c:var(--olive); background:var(--paper); border-radius:20px; max-width:560px; width:100%; max-height:88vh; overflow:auto; border:3px solid var(--c)}
+.sheet .hd{display:flex; gap:14px; align-items:center; padding:18px 18px 8px; color:var(--c)}
+.sheet .hd svg.g{width:64px; height:64px; flex:none}
+.sheet .hd h2{color:var(--ink); font-size:28px}
+.sheet .hd .tm{font-size:12px; letter-spacing:.1em; text-transform:uppercase; font-weight:700}
+.sheet .bd{padding:4px 18px 18px; display:flex; flex-direction:column; gap:10px}
+.sheet ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px}
+.sheet li{padding:10px 12px; background:var(--bg); border-radius:12px; font-size:17px}
+.sheet li small{color:var(--muted); font-size:13px; margin-left:6px; white-space:nowrap}
+.sheet .status{font-size:15px; color:var(--muted); display:flex; align-items:center; gap:6px}
+.sheet .status svg{width:20px; height:20px; color:var(--gold)}
+
+/* Partita */
+.play{background:var(--paper); border:1px solid var(--line); border-radius:20px; padding:18px; display:flex; flex-direction:column; gap:16px}
+.hud{display:flex; justify-content:space-between; align-items:center; gap:10px; font-size:15px; color:var(--muted); font-variant-numeric:tabular-nums}
+.hud b{color:var(--ink)}
+.timer{height:8px; background:var(--bg); border-radius:99px; overflow:hidden}
+.timer i{display:block; height:100%; width:100%; background:var(--clay); border-radius:99px; transform-origin:left; transition:background .3s}
+.timer.low i{background:var(--ko)}
+.qrow{display:flex; gap:12px; align-items:flex-start}
+.q{font-family:var(--display); font-weight:600; font-size:clamp(22px,3.8vw,30px); line-height:1.25; flex:1; min-width:0}
+.opts{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+@media (max-width:560px){.opts{grid-template-columns:1fr}}
+.opt{border:2px solid var(--line); background:var(--paper); border-radius:14px; padding:14px 16px; font-size:18px; text-align:left; min-height:60px; transition:transform .1s}
+.opt:active{transform:scale(.98)}
+.opt.ko{border-color:var(--ko); background:var(--ko-soft); color:var(--ko); text-decoration:line-through}
+.opt.ok{border-color:var(--ok); background:var(--ok-soft); color:var(--ok); font-weight:700}
+.opt:disabled{cursor:default}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
+@media (prefers-reduced-motion: reduce){.shake{animation:none}.opt{transition:none}}
+.expl{border-radius:14px; padding:12px 16px; font-size:17px; background:var(--bg)}
+.expl.ok{background:var(--ok-soft)} .expl.ko{background:var(--ko-soft)}
+.expl small{display:block; color:var(--muted); font-size:14px; margin-top:4px}
+.clues{display:flex; flex-direction:column; gap:8px; margin:0; padding:0; list-style:none}
+.clues li{background:var(--bg); border-radius:12px; padding:10px 14px; font-size:18px; display:flex; gap:10px; align-items:flex-start}
+.clues li b{font-family:var(--display); color:var(--clay)}
+.bigName{font-family:var(--display); font-weight:800; font-size:clamp(30px,6vw,46px); text-align:center; padding:8px 0}
+.bins{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+.bin{--c:var(--gold); border:3px solid var(--c); background:var(--paper); border-radius:16px; padding:16px 6px; font-family:var(--display); font-weight:800; font-size:clamp(17px,3vw,22px); color:var(--c); display:flex; flex-direction:column; align-items:center; gap:6px}
+.bin svg{width:36px; height:36px}
+.bin.ko{background:var(--ko-soft); opacity:.6}
+.bin.ok{background:var(--ok-soft)}
+.match{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.match .col{display:flex; flex-direction:column; gap:10px; min-width:0}
+.mt{border:2px solid var(--line); background:var(--paper); border-radius:14px; padding:12px; font-size:16px; text-align:left; min-height:64px}
+.mt.nm{font-family:var(--display); font-weight:800; font-size:18px}
+.mt.sel{border-color:var(--clay); background:var(--clay-soft)}
+.mt.done{border-color:var(--ok); background:var(--ok-soft); color:var(--ok)}
+.mt:disabled{cursor:default}
+
+/* Fine partita */
+.end{text-align:center; display:flex; flex-direction:column; gap:14px; align-items:center}
+.end .bigstars{display:flex; gap:6px; color:var(--gold)}
+.end .bigstars svg{width:56px; height:56px}
+.end .bigstars .off{color:var(--line)}
+.end h2{font-size:30px}
+.end .score{font-size:20px; font-variant-numeric:tabular-nums}
+.review{text-align:left; width:100%; display:flex; flex-direction:column; gap:8px}
+.review div{background:var(--bg); border-radius:12px; padding:10px 14px; font-size:16px}
+.review small{color:var(--muted)}
+.promo{background:var(--clay-soft); color:var(--clay); border-radius:14px; padding:10px 16px; font-weight:700}
+
+/* Progressi */
+.panel{background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:18px; display:flex; flex-direction:column; gap:12px}
+.rank{display:flex; gap:16px; align-items:center}
+.rank .medal{width:72px; height:72px; border-radius:50%; background:var(--clay); color:#fff; display:grid; place-items:center; font-family:var(--display); font-weight:800; font-size:28px; flex:none; box-shadow:inset 0 0 0 4px var(--paper), 0 0 0 3px var(--clay)}
+.rank h2{font-size:26px}
+.bar{height:14px; background:var(--bg); border-radius:99px; overflow:hidden}
+.bar i{display:block; height:100%; background:var(--clay); border-radius:99px}
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px}
+.stat{background:var(--bg); border-radius:14px; padding:12px 14px}
+.stat b{display:block; font-family:var(--display); font-size:28px; font-weight:800; font-variant-numeric:tabular-nums}
+.stat span{font-size:14px; color:var(--muted)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse; width:100%; font-size:15px}
+th,td{padding:10px 8px; border-bottom:1px solid var(--line); text-align:left; white-space:nowrap}
+th{font-size:13px; color:var(--muted); font-weight:500}
+.grades{display:flex; flex-direction:column; gap:4px; margin:0; padding:0; list-style:none; font-size:15px}
+.grades li{display:flex; justify-content:space-between; padding:6px 10px; border-radius:10px; color:var(--muted); font-variant-numeric:tabular-nums}
+.grades li.me{background:var(--clay-soft); color:var(--clay); font-weight:700}
+.grades li.done{color:var(--ink)}
+
+.setRow{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px 0; border-top:1px solid var(--line)}
+.setRow:first-of-type{border-top:0}
+.setRow p{margin:0} .setRow small{display:block; color:var(--muted); font-size:14px}
+.sw{width:58px; height:34px; border-radius:99px; border:0; background:var(--line); position:relative; flex:none}
+.sw::after{content:""; position:absolute; top:4px; left:4px; width:26px; height:26px; border-radius:50%; background:#fff; transition:left .15s; box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.sw[aria-checked="true"]{background:var(--ok)}
+.sw[aria-checked="true"]::after{left:28px}
+.seg{display:flex; gap:4px}
+.seg button{border:1px solid var(--line); background:var(--paper); border-radius:10px; padding:6px 12px; font-size:15px}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+.muted{color:var(--muted)}
+.foot{font-size:13px; color:var(--muted); text-align:center}
+.gear{width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:var(--paper); display:grid; place-items:center; color:var(--muted)}
+.gear svg{width:22px; height:22px}
+.gear[aria-current="true"]{color:var(--clay); border-color:var(--clay)}
+/* Sfida di Elmo */
+.quest{background:var(--ink); color:var(--paper); border-radius:18px; padding:16px 18px; display:flex; gap:14px; align-items:center; flex-wrap:wrap}
+.quest .lab{font-family:var(--display); font-weight:800; font-size:13px; letter-spacing:.14em; color:var(--gold)}
+.quest h3{font-size:21px; color:var(--paper)}
+.quest p{margin:2px 0 0; font-size:15px; opacity:.8}
+.quest .tx{flex:1 1 240px; min-width:0}
+.quest .btn{background:var(--gold); color:#1F1B18}
+.quest .btn.ghost{background:transparent; color:var(--paper); border-color:rgba(255,255,255,.35)}
+/* Parole del glossario */
+.gw{border:0; background:none; padding:0; font:inherit; color:inherit; text-decoration:underline dotted var(--clay) 2px; text-underline-offset:3px; cursor:pointer}
+.words{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:10px}
+.word{background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; gap:10px; align-items:flex-start}
+.word div{flex:1; min-width:0}
+.word b{font-family:var(--display); font-size:18px; display:block}
+.word p{margin:2px 0 0; font-size:16px}
+.word small{color:var(--muted); font-size:13px}
+.word .spk{width:38px; height:38px}
+.pop{position:fixed; left:16px; right:16px; bottom:calc(16px + env(safe-area-inset-bottom,0px)); max-width:560px; margin:0 auto; background:var(--ink); color:var(--paper); border-radius:16px; padding:14px 16px; z-index:30; display:flex; gap:12px; align-items:flex-start; box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.pop b{font-family:var(--display); font-size:18px; display:block; color:var(--gold)}
+.pop p{margin:2px 0 0}
+.pop div{flex:1; min-width:0}
+.pop button.x{border:0; background:transparent; color:var(--paper); font-size:24px; line-height:1; padding:0 4px}
+/* Famiglie */
+.fams{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px}
+.fam{background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:16px; display:flex; flex-direction:column; align-items:center; gap:0}
+.fam h3{font-size:18px; align-self:flex-start; margin-bottom:12px}
+.frow{display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap}
+.fn{border:2px solid var(--c); background:var(--paper); border-radius:14px; padding:8px 12px; display:flex; flex-direction:column; align-items:center; gap:2px; min-width:96px; color:var(--c)}
+.fn svg{width:30px; height:30px}
+.fn span{font-family:var(--display); font-weight:800; color:var(--ink); font-size:16px}
+.link{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); text-align:center; padding:0 2px}
+.link.heart{color:var(--troy)}
+.vline{width:2px; height:22px; background:var(--line); position:relative}
+.vlab{font-size:12px; color:var(--muted); padding:2px 0 6px}
+.fam ul{margin:14px 0 0; padding:0; list-style:none; align-self:stretch; display:flex; flex-direction:column; gap:6px}
+.fam li{font-size:15px; background:var(--bg); border-radius:10px; padding:8px 10px}
+.fam li small{color:var(--muted)}
+/* Mappa */
+.mapWrap{background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:10px; overflow:hidden}
+.map{width:100%; height:auto; display:block; max-height:72vh}
+.map .sea{fill:var(--water)}
+.map .land{fill:var(--land); stroke:var(--coast); stroke-width:1.2; stroke-linejoin:round}
+.map .route{fill:none; stroke:var(--clay); stroke-width:3; stroke-dasharray:7 6; stroke-linecap:round}
+.map .pin{cursor:pointer}
+.map .pin circle.dot{fill:var(--clay); stroke:var(--paper); stroke-width:3}
+.map .pin circle.hit{fill:transparent}
+.map .pin text{font-family:var(--body); font-size:17px; font-weight:700; fill:var(--ink); paint-order:stroke; stroke:var(--paper); stroke-width:4px}
+.map .pin.sel circle.dot{fill:var(--ink)}
+.map .pin.ok circle.dot{fill:var(--ok)}
+.map .pin.ko circle.dot{fill:var(--ko)}
+.map .landlab{font-family:var(--display); font-size:22px; font-weight:800; fill:var(--coast); letter-spacing:.3em}
+.map .sealab{font-family:var(--display); font-size:22px; font-weight:600; fill:var(--sea); opacity:.7; letter-spacing:.2em}
+.placeInfo{background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:14px 16px; display:flex; gap:12px; align-items:flex-start}
+.placeInfo div{flex:1; min-width:0}
+.placeInfo h3{font-size:22px}
+.placeInfo p{margin:4px 0 0}
+.placeInfo small{color:var(--muted)}
+/* Sfida a due */
+.who3{display:flex; gap:8px; flex-wrap:wrap}
+.who3 button{border:2px solid var(--line); background:var(--paper); border-radius:14px; padding:10px 18px; font-family:var(--display); font-weight:800; font-size:18px}
+.who3 button[aria-pressed="true"]{border-color:var(--clay); background:var(--clay-soft); color:var(--clay)}
+.code{font-family:var(--display); font-weight:800; font-size:44px; letter-spacing:.2em; text-align:center; color:var(--clay)}
+.linkBox{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.linkBox input{flex:1 1 220px; min-width:0; font:inherit; font-size:15px; padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:var(--bg); color:var(--ink)}
+.codeIn{font-family:var(--display); font-size:28px; letter-spacing:.2em; text-transform:uppercase; width:8ch; text-align:center; padding:8px; border-radius:12px; border:2px solid var(--line); background:var(--paper); color:var(--ink)}
+.racers{display:flex; flex-direction:column; gap:8px}
+.racer{display:grid; grid-template-columns:70px 1fr 48px; gap:10px; align-items:center; font-size:15px}
+.racer b{font-family:var(--display)}
+.racer .bar i{transition:width .3s}
+.racer.me b{color:var(--clay)}
+.racer .n{text-align:right; font-variant-numeric:tabular-nums; font-weight:700}
+.bigWin{font-family:var(--display); font-weight:800; font-size:clamp(30px,6vw,44px); text-align:center; color:var(--clay)}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand" id="brand"></div>
+    <div class="grade" id="gradeChip"></div>
+    <button class="gear" id="gear" data-tab="imp" aria-label="Impostazioni"></button>
+  </header>
+  <nav class="tabs" id="tabs" aria-label="Sezioni"></nav>
+  <main id="app" class="wrap" style="gap:16px"></main>
+  <p class="foot">Contenuti tratti solo dalle pagine del libro di Teto. Capitolo II in corso.</p>
+</div>
+<div id="sheet"></div>
+<div id="pop"></div>
+
+<script>
+/* ============ DATI DAL LIBRO ============ */
+const CAPS = [
+  { n:1, rom:"I", pag:"pagg. 15–34", stato:"completo",
+    sezioni:["Le nozze di Teti","La scelta di Paride","La promessa di Afrodite","Il rapimento di Elena"],
+    punti:[
+      {sec:"Inizio del capitolo", t:"Gea, la madre terra, è stanca: gli uomini sono troppi e i loro passi pesano su di lei. Chiede aiuto a Zeus, il re degli dèi.", pag:"15", chi:["gea","zeus"]},
+      {sec:"Inizio del capitolo", t:"Zeus chiede consiglio a Temi, la dea della giustizia. Lei risponde: «Guerra». Una guerra lunga e terribile, e saranno gli dèi a creare l'occasione dello scontro.", pag:"16", chi:["temi","zeus"]},
+      {sec:"Le nozze di Teti", t:"Teti, la bella dea delle acque adottata da Era, aveva rifiutato Zeus. Per volere di Zeus sposa Peleo, l'uomo più coraggioso, ma mortale. Zeus decide che proprio quelle nozze accenderanno la guerra.", pag:"17–18", chi:["teti","peleo","zeus","era"]},
+      {sec:"Le nozze di Teti", t:"I doni: Chirone il centauro regala una lancia di frassino, resa elegante da Atena e rifinita da Efesto con bronzo e ferro. Poseidone regala i cavalli divini Balio e Xanto, che non conoscono morte.", pag:"18–19", chi:["chirone","atena","efesto","poseidone","lancia","cavalli"]},
+      {sec:"Le nozze di Teti", t:"Gli dèi predicono che gli sposi avranno un figlio eroico, più forte e valoroso del padre.", pag:"20", chi:["peleo","teti"]},
+      {sec:"Le nozze di Teti", t:"Eris, la dea della discordia, porta una mela d'oro «per la dea più bella». Afrodite, Era e Atena la vogliono tutte e tre.", pag:"20", chi:["eris","mela","afrodite","era","atena"]},
+      {sec:"Le nozze di Teti", t:"Zeus manda Ermes, il dio dai sandali alati. Ermes dice che a scegliere sarà Paride, figlio di Priamo re di Troia.", pag:"21", chi:["ermes","paride","priamo"]},
+      {sec:"La scelta di Paride", t:"Le tre dee vanno a Troia. Era promette a Paride il potere, Atena coraggio e vittorie, Afrodite la donna più bella del mondo. Paride dà la mela d'oro ad Afrodite. Era e Atena, offese, se ne vanno.", pag:"21–24", chi:["era","atena","afrodite","paride","mela"]},
+      {sec:"La promessa di Afrodite", t:"La donna promessa è Elena, figlia di Zeus e moglie di Menelao, re di Sparta. Afrodite manda con Paride suo figlio Enea, che è molto coraggioso.", pag:"24–26", chi:["elena","menelao","enea","afrodite"]},
+      {sec:"La promessa di Afrodite", t:"Paride fa costruire una nave e parte con Enea sul Mar Egeo verso il Peloponneso, dove regnano Menelao e suo fratello Agamennone. Paride è bello ma pauroso. Enea lo aiuta, ma non approva l'impresa.", pag:"26–28", chi:["paride","enea","agamennone","egeo","peloponneso"]},
+      {sec:"Il rapimento di Elena", t:"A Sparta Menelao accoglie i due principi. Deve partire per Creta, perché è morto suo nonno Catreo, e chiede loro di proteggere Elena e i figli Ermione e Plistene.", pag:"28–32", chi:["menelao","sparta","catreo","creta","ermione","plistene"]},
+      {sec:"Il rapimento di Elena", t:"Paride non rispetta le regole dell'ospitalità. Afrodite fa dimenticare a Elena figli e marito, ed Elena segue Paride sulla nave. Enea è al timone. Rotta verso Troia!", pag:"32–34", chi:["paride","elena","afrodite","enea","troia"]}
+    ]},
+  { n:2, rom:"II", pag:"pagg. 37–42", stato:"in corso", fino:"42",
+    sezioni:["Nove anni di assedio","L'ira di Achille"],
+    punti:[
+      {sec:"Inizio del capitolo", t:"Sono passati molti anni. A Troia Elena ha conosciuto il re Priamo, la regina Ecuba e Andromaca, moglie del valoroso Ettore.", pag:"37", chi:["elena","priamo","ecuba","andromaca","ettore"]},
+      {sec:"Inizio del capitolo", t:"È arrivato l'immenso esercito di Agamennone e Menelao. Gli altri re avevano giurato di aiutare Menelao a punire Paride e i Troiani. Tra tutti si distingue Achille, il giovane semidio figlio di Teti e Peleo.", pag:"37", chi:["agamennone","menelao","achille","teti","peleo"]},
+      {sec:"Inizio del capitolo", t:"Da nove anni i Greci assediano Troia. Le navi sono tirate in secco perché il legno non marcisca. Zeus vuole che la guerra continui.", pag:"38", chi:["troia","campo","zeus"]},
+      {sec:"Inizio del capitolo", t:"Ogni tanto c'è una tregua: Greci e Troiani seppelliscono i loro morti e si riposano.", pag:"39", chi:[]},
+      {sec:"L'ira di Achille", t:"Agamennone, re di Micene e comandante in capo, tiene con sé Criseide, figlia di Crise, sacerdote di Apollo. Crise chiede di riavere la figlia, ma Agamennone lo caccia via.", pag:"40–41", chi:["agamennone","micene","criseide","crise"]},
+      {sec:"L'ira di Achille", t:"Crise prega Apollo, il dio dall'arco d'argento. Apollo scaglia frecce invisibili e porta la peste nel campo greco: per nove giorni muoiono cani, cavalli e uomini.", pag:"41–42", chi:["crise","apollo","campo"]},
+      {sec:"L'ira di Achille", t:"Il decimo giorno Achille chiama tutti all'assemblea. L'indovino Calcante, dopo che Achille ha giurato di proteggerlo, rivela: Apollo è adirato per Criseide e per Crise, cacciato da Agamennone.", pag:"42", chi:["achille","calcante","apollo","criseide","crise"]}
+    ]}
+];
+
+/* t = squadra della carta; sq = squadra nel gioco "Schiera le squadre" (solo quando il libro è chiaro); liv 1 = principale, 2 = minore */
+const P = {
+ gea:{n:"Gea",t:"dei",liv:2,caps:[1],g:"terra",chi:"La madre terra, stanca degli uomini",
+   f:[["È la madre terra.","15"],["È stanca: gli uomini sono troppi e i loro passi pesano su di lei.","15"],["Chiede aiuto a Zeus.","15"]],
+   ind:["Mi lamento perché gli uomini sono diventati troppi.","Ogni loro passo pesa sul mio corpo.","Sono la madre terra."]},
+ zeus:{n:"Zeus",t:"dei",sq:"dei",liv:1,caps:[1,2],g:"fulmine",chi:"Il re degli dèi e dell'Olimpo",
+   f:[["È il re degli dèi e dell'Olimpo. Lancia le saette.","15–16"],["Per aiutare Gea decide di far scoppiare una guerra.","16"],["Teti lo aveva rifiutato e lui non ha dimenticato l'offesa.","17"],["È il padre di Elena.","25"],["Dopo nove anni di guerra vuole ancora che continui.","38"]],
+   ind:["Voglio che la guerra e l'assedio di Troia continuino.","Ho deciso che le nozze di Teti accenderanno la guerra.","Sono il re degli dèi e lancio le saette."]},
+ temi:{n:"Temi",t:"dei",sq:"dei",liv:2,caps:[1],g:"bilancia",chi:"La dea della giustizia",
+   f:[["È la dea della giustizia.","16"],["Consiglia a Zeus una guerra lunga e terribile.","16"],["Dice che saranno gli dèi a creare l'occasione dello scontro.","16"]],
+   ind:["Zeus mi chiede come aiutare la madre terra.","La mia risposta è: «Guerra».","Sono la dea della giustizia."]},
+ teti:{n:"Teti",t:"dei",sq:"dei",liv:1,caps:[1,2],g:"onda",chi:"La dea delle acque, sposa di Peleo",
+   f:[["È la bella dea delle acque, adottata da Era da piccola.","17"],["Aveva rifiutato Zeus.","17"],["Per volere di Zeus sposa Peleo, un uomo mortale.","17–18"],["È la madre di Achille.","37"]],
+   ind:["Ho detto di no a Zeus.","Alle mie nozze arriva la mela d'oro.","Sono la dea delle acque e la mamma di Achille."]},
+ peleo:{n:"Peleo",t:"altri",liv:1,caps:[1,2],g:"elmo",chi:"L'uomo più coraggioso, sposo di Teti",
+   f:[["È l'uomo più coraggioso tra tutti gli uomini, ma è mortale.","17"],["Sposa la dea Teti.","17"],["Riceve in dono la lancia di Chirone e i cavalli di Poseidone.","18–19"],["È il padre di Achille.","37"]],
+   ind:["Ricevo in dono due cavalli che non conoscono morte.","Sono un uomo mortale, ma sposo una dea.","Sono il papà di Achille."]},
+ chirone:{n:"Chirone",t:"altri",liv:2,caps:[1],g:"albero",chi:"Il centauro che regala la lancia",
+   f:[["È un centauro.","18"],["È il primo a portare un dono agli sposi: una lancia di frassino che ha intagliato lui.","18"]],
+   ind:["Sono il primo a portare un dono agli sposi.","Ho intagliato una lancia di legno di frassino.","Sono un centauro."]},
+ atena:{n:"Atena",t:"dei",sq:"dei",liv:1,caps:[1,2],g:"occhio",chi:"La dea della sapienza dagli occhi azzurri",
+   f:[["È la dea della sapienza, dagli occhi azzurri.","18–20"],["Ha piallato e reso elegante la lancia di Chirone.","18"],["Dice di dominare tutti con l'intelligenza e l'astuzia.","21"],["Promette a Paride coraggio e vittoria in ogni battaglia.","24"],["Offesa dalla scelta di Paride, lascia Troia.","24"]],
+   ind:["Ho reso elegante la lancia per il figlio di Peleo.","A Paride prometto coraggio e vittorie.","Sono la dea della sapienza dagli occhi azzurri."]},
+ efesto:{n:"Efesto",t:"dei",sq:"dei",liv:2,caps:[1],g:"martello",chi:"Rifinisce la lancia con bronzo e ferro",
+   f:[["Dà l'ultimo tocco di forza alla lancia di Chirone.","18"],["La rifinisce con bronzo e ferro.","18"]],
+   ind:["Atena parla di me alle nozze di Teti.","Lavoro il bronzo e il ferro.","Ho rifinito la lancia di frassino."]},
+ poseidone:{n:"Poseidone",t:"dei",sq:"dei",liv:1,caps:[1],g:"tridente",chi:"Il dio del mare",
+   f:[["È il dio del mare.","19"],["Arriva alle nozze guidando un carro.","19"],["Regala a Peleo i cavalli divini Balio e Xanto.","19"]],
+   ind:["Arrivo alle nozze su un carro.","Il mio dono sono due cavalli che non muoiono mai.","Sono il dio del mare."]},
+ eris:{n:"Eris",t:"dei",sq:"dei",liv:1,caps:[1],g:"fiamma",chi:"La dea della discordia",
+   f:[["È la dea della discordia.","20"],["Porta alle nozze una mela d'oro «per la dea più bella».","20"]],
+   ind:["Annuncio: «I doni non sono finiti!».","Il mio dono non è per gli sposi.","Sono la dea della discordia."]},
+ afrodite:{n:"Afrodite",t:"dei",sq:"dei",liv:1,caps:[1,2],g:"specchio",chi:"La dea della bellezza, madre di Enea",
+   f:[["È la dea della bellezza.","20"],["Si prepara con una veste di fiori e una ghirlanda.","22"],["Promette a Paride la donna più bella e vince la mela d'oro.","24"],["È la madre di Enea.","26"],["Fa dimenticare a Elena figli e marito, così Elena segue Paride.","34"]],
+   ind:["Mi guardo allo specchio prima di incontrare Paride.","Prometto a Paride la donna più bella del mondo.","Sono la dea della bellezza e la mamma di Enea."]},
+ era:{n:"Era",t:"dei",sq:"dei",liv:1,caps:[1],g:"scettro",chi:"La moglie di Zeus, signora dell'Olimpo",
+   f:[["È la moglie di Zeus, signora e regina dell'Olimpo.","17–21"],["Ha adottato Teti quando era piccola.","17"],["Promette a Paride di farlo diventare l'uomo più potente.","22"],["Offesa dalla scelta di Paride, lascia Troia.","24"]],
+   ind:["Ho adottato Teti quando era piccola.","A Paride prometto il potere.","Sono la moglie di Zeus."]},
+ ermes:{n:"Ermes",t:"dei",sq:"dei",liv:1,caps:[1],g:"ali",chi:"Il dio dai sandali alati",
+   f:[["Ha i sandali alati; è giovane e intraprendente.","21"],["Zeus gli chiede di far smettere il litigio delle dee.","21"],["Propone che sia Paride a scegliere la più bella.","21"],["Accompagna le tre dee da Paride, a Troia.","22"]],
+   ind:["Zeus mi chiede di far smettere il baccano.","Accompagno tre dee fino a Troia.","Ho i sandali alati."]},
+ paride:{n:"Paride",t:"troiani",sq:"troiani",liv:1,caps:[1,2],g:"nave",chi:"Il principe di Troia che sceglie Afrodite",
+   f:[["È figlio di Priamo, re di Troia. È giovane, elegante e bellissimo.","21–22"],["Dà la mela d'oro ad Afrodite.","24"],["Tra i principi di Troia è il meno abile con le armi e ha paura del rischio.","25–26"],["Mente a Enea e a Menelao sul vero motivo del viaggio.","26–31"],["Non rispetta l'ospitalità di Menelao e porta Elena a Troia.","34"]],
+   ind:["Ho fatto costruire una nave veloce e solida.","Non ho rispettato l'ospitalità del re di Sparta.","Ho dato la mela d'oro ad Afrodite."]},
+ priamo:{n:"Priamo",t:"troiani",sq:"troiani",liv:1,caps:[1,2],g:"corona",chi:"Il re di Troia, padre di Paride",
+   f:[["È il re di Troia.","21"],["È il padre di Paride.","21"],["Enea lo chiama «mio re».","28"],["Elena lo conosce quando arriva a Troia.","37"],["I Greci assediano la sua terra da nove anni.","38"]],
+   ind:["Enea mi chiama «mio re».","Mio figlio ha portato Elena nella mia città.","Sono il re di Troia."]},
+ elena:{n:"Elena",t:"altri",tl:"Da Sparta a Troia",liv:1,caps:[1,2],g:"stella",chi:"La donna più bella, moglie di Menelao",
+   f:[["È la donna più bella del mondo degli uomini.","24–25"],["È figlia di Zeus e moglie di Menelao, re di Sparta.","25"],["È la mamma di Ermione e Plistene.","29–30"],["Afrodite le fa dimenticare figli e marito, e lei segue Paride a Troia.","34"],["A Troia, dall'alto della rocca, guarda il campo dei Greci.","38"]],
+   ind:["Molti principi volevano sposarmi, ma ho scelto Menelao.","Dalla rocca di Troia guardo il campo dei Greci.","Sono la donna più bella del mondo."]},
+ menelao:{n:"Menelao",t:"greci",sq:"greci",liv:1,caps:[1,2],g:"corona",chi:"Il re di Sparta, marito di Elena",
+   f:[["È il re di Sparta: alto, biondo e famoso per il coraggio.","28"],["Ha ereditato il regno alla morte di Tindaro.","28"],["È il fratello di Agamennone.","26"],["Parte per Creta perché è morto suo nonno Catreo.","29–31"],["Chiede a Paride ed Enea di proteggere la sua famiglia.","32"],["Non perdona il rapimento di Elena e va a Troia con l'esercito.","37"]],
+   ind:["Devo partire per l'isola di Creta.","Ho chiesto a due ospiti di proteggere la mia casa.","Sono il re di Sparta e il marito di Elena."]},
+ enea:{n:"Enea",t:"troiani",sq:"troiani",liv:1,caps:[1],g:"elmo",chi:"Il principe troiano figlio di Afrodite",
+   f:[["È un principe troiano, figlio di Afrodite.","26"],["Ha tanto coraggio; è possente e silenzioso.","26–31"],["Accompagna Paride a Sparta, ma non approva la sua impresa.","28"],["Ricorda a Paride le regole dell'ospitalità.","32"],["È al timone della barca quando Paride porta via Elena.","34"]],
+   ind:["Ho detto a Paride: «Questa tua impresa io non l'approvo».","Ero al timone della barca, scuro in volto.","Sono un principe troiano e mia madre è Afrodite."]},
+ agamennone:{n:"Agamennone",t:"greci",sq:"greci",liv:1,caps:[1,2],g:"spada",chi:"Il re di Micene, comandante in capo",
+   f:[["È il fratello di Menelao; regnano tutti e due sul Peloponneso.","26"],["Guida con Menelao l'immenso esercito arrivato a Troia.","37"],["È il re di Micene e il comandante in capo: il più ostinato e feroce.","40"],["Tiene con sé Criseide e caccia via suo padre Crise.","40–41"]],
+   ind:["Ho detto a un sacerdote: «Vai via di qui!».","Sono il fratello di Menelao.","Sono il re di Micene e il comandante in capo."]},
+ ermione:{n:"Ermione",t:"greci",liv:2,caps:[1],g:"fiore",chi:"La piccola principessa, figlia di Menelao",
+   f:[["È la figlia di Menelao ed Elena.","29"],["Ha imparato una danza e la mostra al papà.","29"]],
+   ind:["Ho detto: «Padre, ho imparato una danza!».","Il mio fratellino si chiama Plistene.","Sono la figlia di Menelao ed Elena."]},
+ plistene:{n:"Plistene",t:"greci",liv:2,caps:[1],g:"spada",chi:"Il fratellino di Ermione",
+   f:[["È il fratellino di Ermione, figlio di Menelao ed Elena.","29–30"],["Ammira il coltello che il papà porta al fianco.","30"]],
+   ind:["Corro incontro al mio papà.","Ammiro il coltello che porta al fianco.","Sono il fratellino di Ermione."]},
+ catreo:{n:"Catreo",t:"altri",liv:2,caps:[1],g:"isola",chi:"Il nonno di Menelao, morto a Creta",
+   f:[["È il nonno di Menelao, il padre di suo padre.","29–31"],["Muore sull'isola di Creta e Menelao parte per i funerali.","29"]],
+   ind:["Dopo i miei funerali i nobili faranno dei giochi in mio onore.","Vivevo sull'isola di Creta.","Sono il nonno di Menelao."]},
+ tindaro:{n:"Tindaro",t:"altri",liv:2,caps:[1],g:"corona",chi:"Prima di Menelao, regnava su Sparta",
+   f:[["Alla sua morte Menelao ha ereditato il regno di Sparta.","28"]],
+   ind:["Il mio nome compare quando si parla del regno di Sparta.","Dopo di me ha regnato un re alto e biondo.","Alla mia morte Menelao ha ereditato il regno."]},
+ ecuba:{n:"Ecuba",t:"troiani",sq:"troiani",liv:2,caps:[2],g:"corona",chi:"La regina di Troia",
+   f:[["È la regina di Troia.","37"],["Elena la conosce quando arriva a Troia.","37"]],
+   ind:["Elena mi ha conosciuta appena arrivata.","Vivo nella città assediata dai Greci.","Sono la regina di Troia."]},
+ andromaca:{n:"Andromaca",t:"troiani",sq:"troiani",liv:2,caps:[2],g:"fiore",chi:"La moglie di Ettore",
+   f:[["È la moglie del valoroso Ettore.","37"],["Elena la conosce a Troia.","37"]],
+   ind:["Elena mi ha conosciuta a Troia.","Mio marito è un guerriero valoroso.","Sono la moglie di Ettore."]},
+ ettore:{n:"Ettore",t:"troiani",sq:"troiani",liv:1,caps:[2],g:"scudo",chi:"Il valoroso, marito di Andromaca",
+   f:[["Il libro lo chiama «il valoroso Ettore».","37"],["È il marito di Andromaca.","37"]],
+   ind:["Vivo a Troia.","Il libro mi chiama «valoroso».","Mia moglie si chiama Andromaca."]},
+ achille:{n:"Achille",t:"greci",sq:"greci",liv:1,caps:[2],g:"lancia",chi:"Il giovane semidio, figlio di Teti e Peleo",
+   f:[["È il figlio di Teti e Peleo: un giovane semidio.","37"],["Con i suoi uomini si è unito all'esercito di Agamennone.","37"],["Tra tutti i guerrieri è quello che si distingue di più.","37"],["Il decimo giorno della peste chiama tutti all'assemblea.","42"],["Giura di difendere Calcante con la spada.","42"]],
+   ind:["Ho chiamato tutti i condottieri a un'assemblea.","Ho giurato di proteggere l'indovino Calcante.","Sono il figlio di Teti e Peleo."]},
+ crise:{n:"Crise",t:"altri",liv:1,caps:[2],g:"tempio",chi:"L'anziano sacerdote di Apollo",
+   f:[["È un anziano e devoto sacerdote del dio Apollo.","40"],["Chiede ad Agamennone di restituirgli la figlia Criseide.","40"],["Cacciato via, prega Apollo di punire Agamennone.","41"]],
+   ind:["Ho costruito un tempio per il mio dio.","Agamennone mi ha cacciato via.","Sono il sacerdote di Apollo e il padre di Criseide."]},
+ criseide:{n:"Criseide",t:"altri",liv:1,caps:[2],g:"fiore",chi:"La figlia di Crise, tenuta da Agamennone",
+   f:[["È la bella figlia di Crise, il sacerdote di Apollo.","40"],["Agamennone la tiene con sé e non vuole restituirla.","40"]],
+   ind:["Agamennone dice di me: «È mia!».","Mio padre è venuto al campo greco per riavermi.","Sono la figlia di Crise."]},
+ apollo:{n:"Apollo",t:"dei",sq:"dei",liv:1,caps:[2],g:"arco",chi:"Il dio dall'arco d'argento",
+   f:[["È il dio dall'arco d'argento, infallibile.","40–41"],["Ascolta la preghiera del suo sacerdote Crise.","41"],["Con le sue frecce porta la peste nel campo greco per nove giorni.","42"]],
+   ind:["Riposavo sull'Olimpo quando mi ha svegliato una preghiera.","Le mie frecce invisibili hanno portato la peste.","Sono il dio dall'arco d'argento."]},
+ calcante:{n:"Calcante",t:"greci",sq:"greci",liv:1,caps:[2],g:"spirale",chi:"Il più famoso degli indovini",
+   f:[["È il più famoso tra gli indovini.","42"],["Ha paura di parlare e chiede ad Achille di proteggerlo.","42"],["Rivela che Apollo è adirato per Criseide e Crise.","42"]],
+   ind:["Ho paura di far arrabbiare un guerriero.","Ho chiesto ad Achille di difendermi con la spada.","Sono un indovino e so perché è arrivata la peste."]},
+ /* oggetti */
+ mela:{n:"La mela d'oro",t:"oggetto",liv:1,caps:[1],g:"mela",chi:"Il dono di Eris «per la dea più bella»",
+   f:[["La porta Eris, dea della discordia, alle nozze di Teti.","20"],["È destinata «alla dea più bella».","20"],["Paride la consegna ad Afrodite.","24"]],
+   ind:["Sono scintillante e preziosa.","Tre dee litigano per avermi.","Sono d'oro e sono per la dea più bella."]},
+ lancia:{n:"La lancia di frassino",t:"oggetto",liv:1,caps:[1],g:"lancia",chi:"Il dono di Chirone agli sposi",
+   f:[["È di legno di frassino, intagliata da Chirone.","18"],["Atena l'ha resa elegante, Efesto l'ha rifinita con bronzo e ferro.","18"],["È destinata al primo figlio di Peleo e Teti.","18"]],
+   ind:["Peleo mi posa accanto al trono.","Efesto mi ha rifinita con bronzo e ferro.","Sono di frassino e mi ha intagliata Chirone."]},
+ cavalli:{n:"Balio e Xanto",t:"oggetto",tl:"Cavalli divini",liv:1,caps:[1],g:"cavallo",chi:"I cavalli divini, dono di Poseidone",
+   f:[["Sono i due cavalli che Poseidone regala a Peleo.","19"],["Sono cavalli divini: non conoscono morte.","19"],["Saranno del figlio di Peleo e dei suoi discendenti.","19"]],
+   ind:["Trainiamo un carro.","Siamo un dono di Poseidone.","Siamo due cavalli divini che non muoiono mai."]},
+ /* luoghi */
+ olimpo:{n:"L'Olimpo",t:"luogo",liv:1,caps:[1,2],g:"monte",chi:"Il regno degli dèi, dove regna Zeus",
+   f:[["Zeus è il re dell'Olimpo.","15"],["Apollo riposava sull'Olimpo, alla corte di Zeus.","41"]],
+   ind:["Ci abitano le divinità.","Apollo ci riposava quando Crise lo ha chiamato.","Il mio re è Zeus."]},
+ troia:{n:"Troia",t:"luogo",liv:1,caps:[1,2],g:"mura",chi:"La città di Priamo, assediata dai Greci",
+   f:[["È la città del re Priamo, nelle terre della Troade.","21–29"],["Qui Paride porta Elena.","34"],["I Greci la assediano da nove anni.","38"],["Dalla rocca, Elena guarda la pianura e il mare.","38"]],
+   ind:["Sono nelle terre della Troade.","I Greci mi assediano da nove anni.","Sono la città del re Priamo."]},
+ sparta:{n:"Sparta",t:"luogo",liv:1,caps:[1],g:"colonna",chi:"La città di Menelao ed Elena",
+   f:[["È la città del re Menelao e della regina Elena.","25–28"],["Domina la valle del fiume Eurota; il monte Taigeto la protegge alle spalle.","28–29"]],
+   ind:["Il fiume Eurota scorre nella mia valle.","Il monte Taigeto mi protegge alle spalle.","Sono la città di Menelao."]},
+ creta:{n:"Creta",t:"luogo",liv:2,caps:[1],g:"isola",chi:"L'isola dove muore Catreo",
+   f:[["È l'isola dove muore Catreo, il nonno di Menelao.","29"],["Menelao parte per andarci ai funerali.","29–32"]],
+   ind:["Sono un'isola.","Un messo è partito da qui per portare una brutta notizia.","Qui è morto il nonno di Menelao."]},
+ egeo:{n:"Il Mar Egeo",t:"luogo",liv:2,caps:[1],g:"onda",chi:"Il mare del viaggio di Paride ed Enea",
+   f:[["Paride ed Enea lo attraversano costeggiando Lesbo, Samos e Delos.","26"]],
+   ind:["Le mie acque erano calme durante il viaggio.","Nelle mie acque ci sono Lesbo, Samos e Delos.","Paride ed Enea mi attraversano per arrivare a Sparta."]},
+ peloponneso:{n:"Il Peloponneso",t:"luogo",liv:2,caps:[1,2],g:"monte",chi:"La terra di Menelao e Agamennone",
+   f:[["Ci regnano Menelao e suo fratello Agamennone.","26"],["L'esercito greco parte dal Peloponneso e da tutta la Grecia.","37"]],
+   ind:["La nave di Paride arriva sulle mie coste.","Da qui è partito l'esercito per Troia.","Ci regnano Menelao e Agamennone."]},
+ micene:{n:"Micene",t:"luogo",liv:2,caps:[2],g:"corona",chi:"Il regno di Agamennone",
+   f:[["Agamennone è il re di Micene.","40"]],
+   ind:["Il mio re è il comandante in capo.","Il mio re ha cacciato Crise.","Sono il regno di Agamennone."]},
+ campo:{n:"Il campo greco",t:"luogo",liv:1,caps:[2],g:"tenda",chi:"L'accampamento dei Greci davanti a Troia",
+   f:[["Ha tende grandi e lussuose per i comandanti e poveri ripari per i soldati.","38"],["Le navi sono tirate in secco perché il legno non marcisca.","38"],["Apollo ci porta la peste per nove giorni.","42"]],
+   ind:["Elena mi guarda dall'alto della rocca di Troia.","Qui ci sono le tende dei comandanti.","Qui Apollo ha portato la peste."]},
+ atene:{n:"Atene",t:"luogo",liv:2,caps:[1],g:"colonna",chi:"Una città della Grecia, sulla strada per Troia",
+   f:[["Menelao sa che le terre di Priamo sono lontane, oltre Atene e Delo.","29"]],
+   ind:["Sono una città della Grecia.","Menelao mi nomina pensando a quanto è lontana Troia.","Le terre di Priamo sono oltre me e Delo."]},
+ lesbo:{n:"Lesbo",t:"luogo",liv:2,caps:[1],g:"isola",chi:"L'isola costeggiata da Paride ed Enea",
+   f:[["Paride ed Enea la costeggiano all'inizio del viaggio verso Sparta.","26"]],
+   ind:["Sono un'isola del Mar Egeo.","Sono vicina alla costa di Troia.","Paride ed Enea mi costeggiano per prima."]},
+ samos:{n:"Samos",t:"luogo",liv:2,caps:[1],g:"isola",chi:"Un'isola sulla rotta per Sparta",
+   f:[["Dopo Lesbo, la nave di Paride passa vicino a Samos.","26"]],
+   ind:["Sono un'isola del Mar Egeo.","Sono la seconda isola del viaggio di Paride.","La nave passa da me subito dopo Lesbo."]},
+ delos:{n:"Delos",t:"luogo",liv:2,caps:[1],g:"isola",chi:"La piccola isola che la nave di Paride aggira",
+   f:[["La nave di Paride la aggira per arrivare presto nel Peloponneso.","26"],["Menelao dice che le terre di Priamo sono oltre Atene e Delo.","29"]],
+   ind:["Sono un'isola piccolissima.","La nave di Paride mi gira intorno.","Sono l'ultima isola prima del Peloponneso."]},
+ ellesponto:{n:"L'Ellesponto",t:"luogo",liv:2,caps:[1],g:"onda",chi:"Lo stretto di mare vicino alle terre di Priamo",
+   f:[["Menelao sa che le terre di Priamo sono lontane, verso l'Ellesponto.","29"]],
+   ind:["Sono fatto d'acqua.","Sono vicino alle terre della Troade.","Menelao sa che le terre di Priamo sono verso di me."]}
+};
+
+/* Chi l'ha detto? Frasi riscritte in modo semplice: [cap, contesto, frase, chi, pagina] */
+const DETTI = [
+ [1,"La madre terra va da Zeus a lamentarsi.","Gli uomini sono troppi e i loro passi pesano su di me: non ce la faccio più!","gea","15"],
+ [1,"Zeus chiede un consiglio per aiutare la madre terra. La risposta è una parola sola.","Guerra! E che sia lunga e terribile.","temi","16"],
+ [1,"È il primo invitato a portare un regalo agli sposi.","Ecco il mio dono: una lancia di frassino che ho intagliato io stesso.","chirone","18"],
+ [1,"Alle nozze di Teti, parla della lancia di Chirone.","L'ho resa elegante, perché sia degna del vostro primo figlio: sarà un eroe.","atena","18"],
+ [1,"Arriva alle nozze su un carro e porge le redini a Peleo.","Ti regalo questi due cavalli: non moriranno mai.","poseidone","19"],
+ [1,"Alle nozze alza in mano una mela d'oro.","Questo dono non è per gli sposi: è per la dea più bella!","eris","20"],
+ [1,"Le tre dee litigano e Zeus manda qualcuno a calmarle.","Io non saprei scegliere… ma conosco un principe di Troia che saprà farlo.","ermes","21"],
+ [1,"Davanti a Paride, una dea offre qualcosa oltre alla bellezza.","Scegli me e diventerai l'uomo più potente del mondo!","era","22"],
+ [1,"Davanti a Paride, una dea parla di coraggio.","Scegli me e vincerai ogni battaglia!","atena","24"],
+ [1,"Davanti a Paride, la terza dea gli si avvicina sorridendo.","Scegli me e avrai in sposa la donna più bella del mondo.","afrodite","24"],
+ [1,"Paride spiega a Enea perché vuole partire, ma non dice la verità.","Voglio solo visitare quelle terre e fare amicizia con il re.","paride","26"],
+ [1,"Durante il viaggio, scopre il vero motivo dell'impresa.","Ti aiuterò perché veniamo dalla stessa terra, ma questa impresa non mi piace.","enea","27–28"],
+ [1,"Una bambina entra di corsa nella sala del trono di Sparta.","Papà, ho imparato una danza!","ermione","29"],
+ [1,"Prima di partire per Creta, il re parla ai due ospiti.","Restate qui a proteggere mia moglie e i miei figli?","menelao","32"],
+ [1,"A Sparta, il re è appena partito. Uno dei due principi ricorda le regole.","Non dobbiamo offendere chi ci ha accolto in casa sua.","enea","32"],
+ [1,"Sulla nave, con Elena accanto, dà un ordine.","Rotta verso Troia!","paride","34"],
+ [2,"Un anziano sacerdote chiede di riavere sua figlia.","È mia! Vattene e non tornare più a chiedermela.","agamennone","40"],
+ [2,"Cacciato via, un sacerdote prega il suo dio.","Dio dall'arco d'argento, punisci Agamennone per come mi ha trattato!","crise","41"],
+ [2,"Dopo nove giorni di peste, un guerriero chiede aiuto all'indovino.","Dimmi che cosa succede! Chi ci ha mandato questa maledizione?","achille","42"],
+ [2,"Prima di dire la verità sulla peste, ha paura.","Parlerò solo se mi prometti di difendermi con la spada.","calcante","42"],
+ [2,"Davanti a tutti, rivela il motivo della peste.","Apollo è arrabbiato per Criseide e per suo padre, cacciato da Agamennone.","calcante","42"]
+].map(([cap,ctx,fr,id,pag])=>({cap,ctx,fr,id,pag}));
+
+/* Glossario: [parola, spiegazione, pagina, capitoli, forme da sottolineare nel riassunto] */
+const PAROLE = [
+ ["assedio","Quando un esercito circonda una città per tanto tempo, per costringerla ad arrendersi.","38",[2],["assedio","assediano","assedi"]],
+ ["tregua","Una pausa nella guerra: per un po' i nemici smettono di combattere.","39",[2],["tregua"]],
+ ["indovino","Una persona che sa leggere i segni degli dèi e prevedere il futuro.","42",[2],["indovino"]],
+ ["sacerdote","Una persona che si occupa del culto di un dio, nel suo tempio.","40",[2],["sacerdote"]],
+ ["semidio","Il figlio di un dio (o di una dea) e di un essere umano.","37",[2],["semidio"]],
+ ["mortale","Che prima o poi muore, come tutti gli esseri umani. Gli dèi invece non muoiono.","17",[1],["mortale"]],
+ ["centauro","Una creatura dei miti: metà uomo e metà cavallo.","18",[1],["centauro"]],
+ ["discordia","Litigio, disaccordo tra persone.","20",[1],["discordia"]],
+ ["ospitalità","Accogliere bene un ospite in casa propria. Chi viene ospitato non deve fare del male a chi lo accoglie.","32",[1],["ospitalità"]],
+ ["peste","Una malattia terribile che si diffonde in fretta e colpisce tantissime persone. Il libro la chiama anche «pestilenza».","42",[2],["peste","pestilenza"]],
+ ["primogenito","Il primo figlio nato in una famiglia.","18",[1],["primogenito"]],
+ ["condottiero","Il capo di un esercito o di un gruppo di guerrieri.","42",[2],["condottieri","condottiero"]],
+ ["comandante in capo","Il capo di tutti i comandanti: decide per tutto l'esercito.","40",[2],["comandante in capo"]],
+ ["Troade","La regione intorno a Troia, in Asia.","29",[1,2],["Troade"]],
+ ["accampamento","Un insieme di tende dove vivono i soldati durante la guerra.","38",[2],["accampamento"]],
+ ["rocca","La parte più alta e protetta di una città.","38",[2],["rocca"]],
+ ["saetta","Un fulmine. Zeus usa le saette come armi.","16",[1],["saette","saetta"]],
+ ["dardo","Una freccia.","42",[2],["dardi","dardo"]],
+ ["messo","Una persona mandata a portare un messaggio o una notizia.","29",[1],["messo"]],
+ ["udienza","Un incontro ufficiale con un re o con una persona importante.","30",[1],["udienza"]],
+ ["sire","Un modo rispettoso per chiamare un re.","29",[1],["sire"]],
+ ["reggia","Il palazzo dove vive il re.","27",[1],["reggia"]],
+ ["timone","La parte della nave che serve a guidarla.","34",[1],["timone"]],
+ ["alla fonda","Si dice di una nave ferma, ancorata vicino alla riva.","29",[1],["alla fonda"]],
+ ["tirare in secco","Portare le navi fuori dall'acqua, sulla spiaggia.","38",[2],["tirate in secco"]],
+ ["redini","Le strisce di cuoio che servono a guidare i cavalli.","19",[1],["redini"]],
+ ["frassino","Un albero con il legno forte ed elastico.","18",[1],["frassino"]],
+ ["intagliare","Scolpire il legno con un coltello o uno scalpello.","18",[1],["intagliato","intagliare"]],
+ ["discendenza","I figli, i figli dei figli e così via.","19",[1],["discendenza"]],
+ ["sacrificio","Un'offerta fatta agli dèi per onorarli o per chiedere aiuto.","15",[1],["sacrifici","sacrificio"]],
+ ["inesorabile","Che non si può fermare né evitare.","16",[1,2],["inesorabile"]],
+ ["vanità","Quando una persona pensa troppo alla propria bellezza e vuole essere ammirata.","28",[1],["vanità"]]
+].map(([w,d,pag,caps,forme])=>({w,d,pag,caps,forme,id:w.replace(/\W+/g,"_")}));
+
+/* Alberi di famiglia (solo legami scritti nel libro) */
+const FAM = [
+ {t:"La famiglia di Achille", gen:["teti","peleo"], leg:"sposi", figli:["achille"], note:[["Teti è una dea, Peleo un uomo: per questo Achille è un semidio.","37"],["Teti era stata adottata da Era quando era piccola.","17"]]},
+ {t:"La famiglia di Menelao", nonno:["catreo","nonno di Menelao"], gen:["menelao","elena"], leg:"sposi", lato:["agamennone","fratello di Menelao"], figli:["ermione","plistene"], note:[["Elena è figlia di Zeus.","25"],["Menelao è diventato re di Sparta alla morte di Tindaro.","28"]]},
+ {t:"La famiglia di Paride", gen:["priamo"], figli:["paride"], note:[["Priamo è il re di Troia, Ecuba è la regina.","37"],["A Troia Elena conosce anche i fratelli di Paride.","37"]]},
+ {t:"Ettore e Andromaca", gen:["ettore","andromaca"], leg:"sposi", figli:[], note:[["Vivono a Troia: il libro chiama Ettore «il valoroso».","37"]]},
+ {t:"Gli dèi e i loro figli", gen:["zeus","era"], leg:"sposi", figli:[], note:[["Zeus è il re degli dèi, Era la regina dell'Olimpo.","17–21"]]},
+ {t:"Zeus ed Elena", gen:["zeus"], figli:["elena"], note:[["Elena è figlia di Zeus, ma vive tra gli uomini.","25"]]},
+ {t:"Afrodite ed Enea", gen:["afrodite"], figli:["enea"], note:[["Afrodite è la dea della bellezza; suo figlio Enea è un principe troiano.","26"]]},
+ {t:"Crise e Criseide", gen:["crise"], figli:["criseide"], note:[["Crise è il sacerdote di Apollo e chiede di riavere sua figlia.","40"]]}
+];
+
+/* Mappa: [id carta, longitudine, latitudine, dove si trova, posizione etichetta] */
+const MAPP = [
+ ["troia",26.24,39.96,"In Asia (oggi è la Turchia), sulla costa, vicino allo stretto dell'Ellesponto.","r"],
+ ["ellesponto",26.5,40.25,"Lo stretto di mare che separa l'Europa dall'Asia, proprio accanto a Troia.","r"],
+ ["lesbo",26.25,39.17,"Un'isola vicina alla costa dell'Asia, a sud di Troia.","r"],
+ ["samos",26.75,37.72,"Un'isola vicinissima alla costa dell'Asia, più a sud di Lesbo.","r"],
+ ["delos",25.27,37.4,"Una piccolissima isola proprio in mezzo al Mar Egeo.","r"],
+ ["creta",24.9,35.25,"La grande isola a sud del Mar Egeo.","b"],
+ ["sparta",22.43,37.08,"Nel sud del Peloponneso, in Grecia, lungo il fiume Eurota.","l"],
+ ["micene",22.76,37.73,"Nel Peloponneso, a nord di Sparta.","r"],
+ ["peloponneso",22.15,37.62,"La grande penisola nel sud della Grecia, unita al resto da una striscia di terra sottile.","t"],
+ ["atene",23.73,37.98,"In Grecia, nella regione dell'Attica, vicino al mare.","r"],
+ ["olimpo",22.35,40.08,"Il monte più alto della Grecia, nel nord. Nei miti è la casa degli dèi.","r"],
+ ["egeo",25.0,38.85,"Il mare tra la Grecia e l'Asia, pieno di isole.","r"]
+].map(([id,lon,lat,geo,lp])=>({id,lon,lat,geo,lp}));
+const ROTTA = [[26.2,39.95],[25.95,39.6],[25.75,39.25],[25.9,38.75],[26.35,38.05],[26.55,37.85],[26.0,37.6],[25.27,37.4],[24.3,36.95],[23.35,36.28],[22.95,36.33],[22.7,36.55],[22.65,36.78],[22.43,37.08]];
+const LAND = [
+ [[21,41.5],[28.5,41.5],[28.5,41.05],[27.5,40.97],[26.95,40.6],[26.6,40.42],[26.2,40.05],[26.55,40.5],[26.8,40.62],[26.2,40.6],[26.05,40.75],[25.4,40.9],[24.6,40.95],[24.0,40.75],[23.75,40.72],[23.9,40.35],[24.3,40.15],[23.75,40.22],[23.7,39.95],[23.35,40.15],[23.3,39.95],[22.95,40.45],[22.6,40.4],[22.55,40.05],[22.8,39.7],[23.1,39.45],[23.2,39.15],[22.9,39.25],[22.8,39.0],[22.55,38.85],[22.9,38.85],[23.3,38.6],[23.6,38.3],[23.95,38.15],[24.05,37.65],[23.7,37.9],[23.45,38.0],[23.2,38.0],[22.95,37.93],[23.15,37.85],[23.1,37.6],[23.5,37.45],[23.15,37.3],[22.75,37.55],[22.75,37.2],[22.95,36.9],[23.2,36.45],[22.85,36.6],[22.65,36.8],[22.5,36.4],[22.35,36.75],[22.05,37.03],[21.95,36.75],[21.7,36.82],[21.65,37.3],[21.3,37.65],[21.12,37.85],[21.4,38.15],[21.73,38.25],[22.08,38.22],[22.6,38.06],[22.88,37.96],[22.95,38.06],[22.6,38.25],[22.3,38.36],[21.85,38.38],[21.5,38.4],[21.15,38.32],[21.0,38.6]],
+ [[28.5,40.4],[27.8,40.38],[27.3,40.4],[26.75,40.32],[26.4,40.12],[26.2,39.98],[26.15,39.75],[26.1,39.5],[26.6,39.55],[27.0,39.6],[26.8,39.35],[26.9,39.0],[26.8,38.75],[26.45,38.62],[26.3,38.3],[26.75,38.2],[27.2,37.95],[27.25,37.6],[27.5,37.3],[27.25,37.0],[27.9,36.95],[28.1,36.75],[28.5,36.8]],
+ [[23.5,35.5],[24.0,35.55],[25.0,35.4],[25.8,35.3],[26.3,35.25],[26.1,35.0],[25.0,35.0],[24.3,35.2],[23.6,35.25]],
+ [[22.85,39.0],[23.3,38.95],[23.6,38.75],[24.15,38.65],[24.2,38.4],[24.6,38.1],[24.5,37.98],[24.05,38.25],[23.6,38.5],[23.2,38.78]],
+ [[25.85,39.3],[26.2,39.38],[26.6,39.2],[26.45,38.98],[26.0,39.1]],
+ [[25.85,38.55],[26.15,38.58],[26.15,38.25],[25.95,38.2]],
+ [[26.6,37.8],[26.95,37.75],[26.85,37.65],[26.55,37.7]],
+ [[25.05,39.95],[25.4,40.0],[25.45,39.82],[25.1,39.8]],
+ [[25.35,37.15],[25.6,37.18],[25.55,36.95],[25.38,36.98]],
+ [[25.1,37.12],[25.25,37.1],[25.2,36.98],[25.05,37.02]],
+ [[25.22,37.43],[25.32,37.43],[25.3,37.37],[25.22,37.38]],
+ [[27.7,36.45],[28.25,36.45],[28.2,36.15],[27.8,35.9]],
+ [[22.95,36.35],[23.1,36.35],[23.05,36.15],[22.92,36.2]]
+];
+for (const k in P) P[k].id = k;
+
+/* Domande: [cap, domanda, [giusta, sbagliata, sbagliata, sbagliata], pagina, chi, spiegazione] */
+const QS = [
+ [1,"Chi è stanca degli uomini perché sono troppi?",["Gea, la madre terra","Era","Teti","Temi"],"15",["gea"],"Gea dice che gli uomini sono troppi e i loro passi pesano su di lei."],
+ [1,"Chi è il re degli dèi?",["Zeus","Poseidone","Apollo","Ermes"],"15",["zeus"],"Zeus è il re degli dèi e dell'Olimpo."],
+ [1,"Temi è la dea della…",["giustizia","bellezza","discordia","sapienza"],"16",["temi"],"Temi è la dea della giustizia."],
+ [1,"Che cosa consiglia Temi a Zeus?",["Far scoppiare una guerra","Usare le sue saette","Mandare una tempesta","Costruire una città"],"16",["temi","zeus"],"Temi dice: «Guerra». Una guerra lunga e terribile."],
+ [1,"Chi sposa la dea Teti?",["Peleo","Paride","Menelao","Zeus"],"17",["teti","peleo"],"Teti sposa Peleo, l'uomo più coraggioso tra tutti gli uomini."],
+ [1,"Teti è la dea delle…",["acque","stelle","foreste","montagne"],"17",["teti"],"Teti è la bella dea delle acque."],
+ [1,"Da chi era stata adottata Teti da piccola?",["Da Era","Da Atena","Da Afrodite","Da Gea"],"17",["teti","era"],"Teti era stata adottata da Era, moglie di Zeus."],
+ [1,"Che cosa ha Peleo di diverso da Teti?",["È un uomo mortale","È un centauro","È troiano","È un dio del mare"],"17",["peleo"],"Peleo è un uomo e quindi è mortale."],
+ [1,"Chi regala agli sposi la lancia di frassino?",["Chirone, il centauro","Poseidone","Eris","Ermes"],"18",["chirone","lancia"],"Chirone il centauro ha intagliato la lancia di frassino."],
+ [1,"Chi ha rifinito la lancia con bronzo e ferro?",["Efesto","Atena","Chirone","Zeus"],"18",["efesto","lancia"],"Atena l'ha resa elegante, Efesto l'ha rifinita con bronzo e ferro."],
+ [1,"A chi è destinata la lancia di frassino?",["Al primo figlio di Peleo e Teti","A Peleo","A Zeus","A Paride"],"18",["lancia"],"Atena dice che la lancia è per il figlio primogenito degli sposi."],
+ [1,"Come si chiamano i cavalli regalati da Poseidone?",["Balio e Xanto","Eurota e Taigeto","Lesbo e Samos","Ermione e Plistene"],"19",["cavalli","poseidone"],"Poseidone regala Balio e Xanto."],
+ [1,"Che cosa hanno di speciale Balio e Xanto?",["Non conoscono morte: sono cavalli divini","Sanno volare","Sanno parlare","Sono figli di Chirone"],"19",["cavalli"],"Poseidone dice: «Non conoscono morte. Sono cavalli divini»."],
+ [1,"Chi è il dio del mare?",["Poseidone","Efesto","Ermes","Apollo"],"19",["poseidone"],"Poseidone, il dio del mare, arriva alle nozze su un carro."],
+ [1,"Che cosa predicono gli dèi agli sposi?",["Avranno un figlio più forte e valoroso del padre","Saranno re di Troia","Avranno dodici figli","Vivranno sull'Olimpo"],"20",["peleo","teti"],"Gli dèi dicono: «Avrete un figlio eroico»."],
+ [1,"Chi porta alle nozze la mela d'oro?",["Eris","Era","Afrodite","Ermes"],"20",["eris","mela"],"La porta Eris, la dea della discordia."],
+ [1,"Eris è la dea della…",["discordia","giustizia","sapienza","bellezza"],"20",["eris"],"Eris è la dea della discordia."],
+ [1,"A chi è destinata la mela d'oro?",["Alla dea più bella","Alla sposa Teti","Alla dea più saggia","A Zeus"],"20",["mela"],"Eris dice che la mela è per la dea più bella."],
+ [1,"Quali tre dee vogliono la mela d'oro?",["Era, Atena e Afrodite","Era, Teti e Gea","Atena, Temi ed Eris","Afrodite, Teti ed Eris"],"20",["era","atena","afrodite","mela"],"Afrodite, Era e Atena litigano per la mela."],
+ [1,"Chi manda Zeus a far smettere il baccano?",["Ermes, dai sandali alati","Apollo","Poseidone","Chirone"],"21",["ermes"],"Zeus fa cenno a Ermes, il dio dai sandali alati."],
+ [1,"Chi deve scegliere la dea più bella?",["Paride","Enea","Menelao","Peleo"],"21",["paride"],"Ermes propone Paride, un giovane di stirpe reale."],
+ [1,"Di chi è figlio Paride?",["Di Priamo, re di Troia","Di Menelao","Di Peleo","Di Agamennone"],"21",["paride","priamo"],"«Paride si chiama, figlio di Priamo, re di Troia.»"],
+ [1,"Che cosa promette Era a Paride?",["Di farlo diventare l'uomo più potente","La donna più bella","Coraggio e vittorie","Due cavalli divini"],"22",["era","paride"],"Era promette il potere."],
+ [1,"Che cosa promette Atena a Paride?",["Coraggio e vittoria in ogni battaglia","La donna più bella","Di diventare re","Una nave veloce"],"24",["atena","paride"],"Atena promette che diventerà l'uomo più audace e vincerà ogni battaglia."],
+ [1,"Che cosa promette Afrodite a Paride?",["La donna più bella del mondo","Il potere","Coraggio e vittorie","La mela d'oro"],"24",["afrodite","paride"],"Afrodite promette in sposa la donna più bella."],
+ [1,"A chi dà la mela d'oro Paride?",["Ad Afrodite","Ad Atena","A Era","A Eris"],"24",["paride","afrodite","mela"],"Paride porge la mela d'oro alla dea della bellezza, Afrodite."],
+ [1,"Chi è la donna più bella promessa a Paride?",["Elena","Ermione","Teti","Criseide"],"25",["elena"],"Afrodite dice: «Elena!»."],
+ [1,"In quale città vive Elena?",["Sparta","Troia","Creta","Micene"],"25",["elena","sparta"],"Elena vive a Sparta."],
+ [1,"Chi è il marito di Elena?",["Menelao","Agamennone","Paride","Enea"],"25",["elena","menelao"],"Elena è la moglie del re Menelao."],
+ [1,"Secondo il libro, chi è il padre di Elena?",["Zeus","Priamo","Tindaro","Peleo"],"25",["elena","zeus"],"Il libro dice: «Elena, figlia di Zeus»."],
+ [1,"Chi accompagna Paride nel viaggio?",["Enea","Ettore","Ermes","Achille"],"26",["enea","paride"],"Afrodite dice a Paride di viaggiare con Enea."],
+ [1,"Di chi è figlio Enea?",["Di Afrodite","Di Era","Di Atena","Di Teti"],"26",["enea","afrodite"],"Afrodite dice: «il principe Enea, mio figlio»."],
+ [1,"Com'è Paride con le armi?",["È il meno abile tra i principi di Troia","È il più forte di Troia","È un grande arciere","È il comandante dell'esercito"],"25–26",["paride"],"Paride è famoso per la bellezza, ma è il meno abile con le armi."],
+ [1,"Che bugia racconta Paride a Enea sul viaggio?",["Che vuole visitare quelle terre e fare amicizia con il re","Che va a cercare Achille","Che va a comprare cavalli","Che va a trovare suo nonno"],"26",["paride","enea"],"Paride mente: dice che vuole visitare quelle terre e diventare amico del re."],
+ [1,"Su quale mare viaggiano Paride ed Enea?",["Il Mar Egeo","Il Mar Rosso","Il Mar Nero","Il Mar Morto"],"26",["egeo"],"La nave viaggia sulle acque del Mar Egeo."],
+ [1,"Chi regna sul Peloponneso?",["Menelao e suo fratello Agamennone","Priamo ed Ettore","Peleo e Achille","Zeus ed Era"],"26",["menelao","agamennone","peloponneso"],"Sul Peloponneso regnano Menelao e il fratello Agamennone."],
+ [1,"Enea approva l'impresa di Paride?",["No: lo aiuta, ma non la approva","Sì, è contentissimo","Sì, l'ha proposta lui","Non ne sa niente fino alla fine"],"28",["enea"],"Enea dice: «Questa tua impresa io non l'approvo»."],
+ [1,"Da chi Menelao ha ereditato il regno di Sparta?",["Da Tindaro","Da Catreo","Da Priamo","Da Agamennone"],"28",["menelao","tindaro"],"Alla morte di Tindaro, Menelao ha ereditato il regno."],
+ [1,"Quale fiume scorre nella valle di Sparta?",["L'Eurota","Lo Xanto","Il Taigeto","Il Delos"],"29",["sparta"],"Sparta domina la valle del fiume Eurota."],
+ [1,"Perché Menelao deve partire per Creta?",["È morto suo nonno Catreo","Deve fare la guerra","Deve sposarsi","Deve comprare una nave"],"29",["menelao","catreo","creta"],"Un messo annuncia la morte di Catreo, il nonno di Menelao."],
+ [1,"Come si chiama la figlia di Menelao ed Elena?",["Ermione","Criseide","Andromaca","Ecuba"],"29",["ermione"],"Ermione dice: «Padre, ho imparato una danza!»."],
+ [1,"Come si chiama il fratellino di Ermione?",["Plistene","Catreo","Tindaro","Calcante"],"29–30",["plistene"],"Plistene è il fratellino di Ermione."],
+ [1,"Che cosa chiede Menelao a Paride ed Enea prima di partire?",["Di proteggere Elena, i figli e il regno","Di andare con lui a Creta","Di tornare subito a Troia","Di costruirgli una nave"],"32",["menelao"],"Menelao chiede: «Resterete a corte, a proteggere mia moglie Elena e i nostri figli?»."],
+ [1,"Quali regole non rispetta Paride a Sparta?",["Le regole dell'ospitalità","Le regole della guerra","Le regole del matrimonio degli dèi","Le regole del mare"],"32–34",["paride"],"Enea ricorda che non si deve offendere chi ti accoglie, ma Paride porta via Elena."],
+ [1,"Come aiuta Afrodite Paride a portare via Elena?",["Le fa dimenticare figli e marito","Le regala la mela d'oro","Addormenta le guardie","Manda una tempesta"],"34",["afrodite","elena"],"Afrodite vela gli occhi di Elena e le cancella la memoria di figli e marito."],
+ [1,"Chi è al timone della barca quando Paride porta via Elena?",["Enea","Paride","Menelao","Ermes"],"34",["enea"],"Enea era al timone, scuro in volto."],
+ [2,"Da quanti anni i Greci assediano Troia?",["Nove","Due","Venti","Cento"],"38",["troia"],"Sono nove lunghi anni di assedio."],
+ [2,"Chi è la regina di Troia?",["Ecuba","Andromaca","Elena","Criseide"],"37",["ecuba"],"A Troia Elena ha conosciuto Ecuba, la regina."],
+ [2,"Chi è la moglie di Ettore?",["Andromaca","Ecuba","Ermione","Criseide"],"37",["andromaca","ettore"],"Andromaca è la moglie del valoroso Ettore."],
+ [2,"Come viene chiamato Ettore nel libro?",["Il valoroso","Il pauroso","Il saggio","Il bellissimo"],"37",["ettore"],"Il libro dice «il valoroso Ettore»."],
+ [2,"Chi si distingue tra tutti nell'esercito greco?",["Achille","Calcante","Paride","Crise"],"37",["achille"],"Tra tutti si distingue Achille, il giovane semidio."],
+ [2,"Di chi è figlio Achille?",["Di Teti e Peleo","Di Zeus ed Era","Di Priamo ed Ecuba","Di Menelao ed Elena"],"37",["achille","teti","peleo"],"Achille è figlio di Teti e Peleo."],
+ [2,"Achille è…",["un giovane semidio","un dio dell'Olimpo","un indovino","un principe troiano"],"37",["achille"],"Achille è il giovane semidio figlio di una dea e di un uomo."],
+ [2,"Perché gli altri re aiutano Menelao?",["Avevano giurato di affiancarlo per punire Paride e i Troiani","Volevano l'oro di Troia","Lo aveva ordinato Apollo","Volevano Elena per sé"],"37",["menelao"],"Gli altri re avevano giurato di affiancare Menelao."],
+ [2,"Perché le navi greche sono tirate in secco?",["Perché il legno non marcisca","Per nasconderle ai Troiani","Perché il mare è secco","Per costruire le tende"],"38",["campo"],"Le navi sono tirate in secco perché il legno non marcisca."],
+ [2,"Che cosa vuole Zeus dopo nove anni di guerra?",["Che la guerra continui","Che finisca subito","Che vincano i Troiani","Che Elena torni a Sparta"],"38",["zeus"],"Zeus non è ancora sazio e vuole che la guerra continui."],
+ [2,"Che cosa fanno Greci e Troiani durante la tregua?",["Seppelliscono i morti e si riposano","Fanno una festa insieme","Costruiscono nuove navi","Scambiano i prigionieri"],"39",[],"Raccolgono i loro morti e danno loro sepoltura, poi si riposano."],
+ [2,"Chi è il comandante in capo dei Greci?",["Agamennone, re di Micene","Achille","Menelao","Calcante"],"40",["agamennone","micene"],"Agamennone è il comandante in capo."],
+ [2,"Chi tiene con sé Agamennone?",["Criseide","Elena","Andromaca","Ermione"],"40",["agamennone","criseide"],"Agamennone tiene con sé la bella Criseide."],
+ [2,"Chi è il padre di Criseide?",["Crise","Calcante","Priamo","Peleo"],"40",["criseide","crise"],"Criseide è figlia di Crise."],
+ [2,"Crise è sacerdote di quale dio?",["Apollo","Zeus","Poseidone","Ermes"],"40",["crise","apollo"],"Crise è un devoto sacerdote del dio Apollo."],
+ [2,"Perché Agamennone non uccide Crise?",["Un sacerdote di Apollo è intoccabile","Perché è suo amico","Perché Achille lo protegge","Perché è troppo vecchio"],"40",["agamennone","crise"],"Un sacerdote di Apollo era intoccabile, anche per Agamennone."],
+ [2,"Come viene chiamato Apollo?",["Il dio dall'arco d'argento","Il dio dai sandali alati","Il dio del mare","Il dio della discordia"],"41",["apollo"],"Crise prega il «dio dall'arco d'argento»."],
+ [2,"Come si vendica Apollo dei Greci?",["Scaglia frecce invisibili e porta la peste","Manda una tempesta sulle navi","Fa crollare le tende","Fa fuggire i cavalli"],"42",["apollo"],"Le frecce invisibili di Apollo seminano la peste."],
+ [2,"Per quanti giorni dura la peste nel campo greco?",["Nove","Tre","Dieci anni","Un giorno"],"42",["apollo","campo"],"Per nove giorni il campo fu simile a un immenso cimitero."],
+ [2,"Chi chiama tutti all'assemblea il decimo giorno?",["Achille","Agamennone","Menelao","Calcante"],"42",["achille"],"Achille chiama a raccolta tutti i condottieri."],
+ [2,"Chi è Calcante?",["Il più famoso tra gli indovini","Un sacerdote troiano","Il fratello di Achille","Il re di Creta"],"42",["calcante"],"Calcante è il più famoso tra gli indovini."],
+ [2,"Che cosa chiede Calcante ad Achille prima di parlare?",["Di difenderlo con la spada","Di dargli oro","Di riportarlo a casa","Di liberare Criseide"],"42",["calcante","achille"],"Calcante ha paura e chiede ad Achille di difenderlo con la spada."],
+ [2,"Secondo Calcante, perché Apollo è arrabbiato?",["Per Criseide e per Crise, cacciato da Agamennone","Perché i Greci hanno perso","Perché nessuno lo prega","Per la mela d'oro"],"42",["calcante","apollo","criseide"],"Calcante dice: «Il dio Apollo è adirato a causa di Criseide. E di Crise»."]
+].map(([cap,q,o,pag,chi,sp])=>({cap,q,o,pag,chi,sp}));
+
+const TEAM = {dei:"Dèi",greci:"Greci",troiani:"Troiani",altri:"Altri personaggi",oggetto:"Oggetto",luogo:"Luogo"};
+const GRADES = [[0,"Recluta"],[50,"Soldato"],[150,"Arciere"],[300,"Cavaliere"],[500,"Guerriero possente"],[800,"Condottiero"],[1200,"Comandante in capo"],[1800,"Semidio"]];
+const GAMES = {
+  quiz:{n:"Quiz",d:"10 domande a scelta multipla. Se sbagli hai una seconda possibilità.",ic:"elmo"},
+  chi:{n:"Chi sono?",d:"Leggi gli indizi e indovina il personaggio. Meno indizi usi, più punti prendi.",ic:"spirale"},
+  abbina:{n:"Abbinamenti",d:"Collega ogni personaggio, oggetto o luogo alla sua descrizione.",ic:"ali"},
+  squadre:{n:"Schiera le squadre",d:"Dèi, Greci o Troiani? Metti ognuno al suo posto.",ic:"scudo"},
+  detto:{n:"Chi l'ha detto?",d:"Leggi la scena e la frase, poi indovina chi parla.",ic:"specchio"},
+  luoghi:{n:"Trova il luogo",d:"Tocca sulla mappa il posto giusto.",ic:"isola"},
+  parole:{n:"Parole difficili",d:"Scegli il significato giusto delle parole del libro.",ic:"bilancia"}
+};
+const GH_URL = ""; /* indirizzo della versione su GitHub, da inserire dopo la pubblicazione */
+const PLAYERS = ["Teto","Cami","Papà"];
+
+/* ============ ICONE ============ */
+const GL = {
+ terra:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.5 3 3.5 15 0 18M12 3c-3.5 3-3.5 15 0 18"/>',
+ fulmine:'<path d="M13 2 5 14h6l-1 8 8-12h-6z"/>',
+ bilancia:'<path d="M12 3v18M7 21h10M4 7h16M4 7l-3 6h6zM20 7l-3 6h6z"/>',
+ onda:'<path d="M2 9c3-3 5-3 7 0s4 3 7 0 4-3 6 0M2 15c3-3 5-3 7 0s4 3 7 0 4-3 6 0"/>',
+ elmo:'<path d="M5 21v-8a7 7 0 0 1 14 0v8h-4v-6H9v6zM12 6V2M7 3.5h10"/>',
+ albero:'<circle cx="12" cy="9" r="6"/><path d="M12 15v7M9 22h6"/>',
+ occhio:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+ martello:'<path d="M3 4h12v5H3zM9 9v12M15 6.5h4"/>',
+ tridente:'<path d="M12 22V6M6 3v5a6 6 0 0 0 12 0V3M12 2v4"/>',
+ fiamma:'<path d="M12 22c-4 0-7-3-7-7 0-5 5-7 5-12 3 2 4 5 4 7 1-1 2-2 2-4 2 2 3 5 3 9 0 4-3 7-7 7z"/>',
+ specchio:'<circle cx="12" cy="9" r="6"/><path d="M12 15v7M9 22h6"/><path d="M9.5 7a3 3 0 0 1 2.5-1.5"/>',
+ scettro:'<circle cx="12" cy="4.5" r="2.5"/><path d="M12 7v15M9 10h6"/>',
+ ali:'<path d="M2 17c6 0 12-4 20-13-2 7-5 10-8 11 2 0 4 0 6-1-3 3-7 4-10 4 1 .3 3 .8 4 1-4 1.5-9 1-12-2z"/>',
+ nave:'<path d="M2 15h20l-3 5H5zM12 15V3M12 4l7 9h-7"/>',
+ corona:'<path d="M3 19h18M3 19 2 7l5 4 5-6 5 6 5-4-1 12"/>',
+ stella:'<path d="M12 2l3 7 7 .6-5.4 4.7L18 21l-6-3.6L6 21l1.4-6.7L2 9.6 9 9z"/>',
+ spada:'<path d="M20 3 9 14M20 3v4L11 16M20 3h-4L7 12M6 13l5 5M8 16l-5 5"/>',
+ fiore:'<circle cx="12" cy="12" r="2.5"/><circle cx="12" cy="6" r="3"/><circle cx="18" cy="12" r="3"/><circle cx="12" cy="18" r="3"/><circle cx="6" cy="12" r="3"/>',
+ isola:'<path d="M2 19c3-2 6-2 9 0s6 2 9 0M5 16c1-4 4-6 7-6s6 2 7 6M12 10V4l4 2.5"/>',
+ scudo:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>',
+ lancia:'<path d="M3 21 16 8M14 6l7-3-3 7z"/>',
+ tempio:'<path d="M3 9l9-6 9 6zM5 9v10M9.5 9v10M14.5 9v10M19 9v10M3 21h18"/>',
+ arco:'<path d="M6 3c8 3 8 15 0 18M6 3v18M4 12h16M17 9l3 3-3 3"/>',
+ spirale:'<path d="M12 12a1 1 0 1 1 2 0 3 3 0 0 1-6 0 5 5 0 0 1 10 0 7 7 0 0 1-14 0 9 9 0 0 1 18 0"/>',
+ mela:'<path d="M12 7c-3-2-8-1-8 5 0 5 3 9 6 9 1 0 1-.5 2-.5s1 .5 2 .5c3 0 6-4 6-9 0-6-5-7-8-5zM12 7c0-2 1-4 3-5"/>',
+ cavallo:'<path d="M7 21v-6c0-5 3-9 8-11l1 2 4 1v3l-3 1-2-1-2 4v7M5 21h10"/>',
+ monte:'<path d="M2 20 9 7l4 6 3-4 6 11z"/>',
+ mura:'<path d="M3 21V8h3v3h3V8h3v3h3V8h3v3h3V8v13M3 21h18M10 21v-4a2 2 0 0 1 4 0v4"/>',
+ colonna:'<path d="M5 4h14M6 7h12M8 7v12M12 7v12M16 7v12M5 21h14M6 19h12"/>',
+ tenda:'<path d="M2 20 12 4l10 16zM12 4v16M9 20l3-6 3 6"/>'
+};
+const UI = {
+ spk:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/>',
+ back:'<path d="M15 5l-7 7 7 7"/>',
+ libro:'<path d="M4 4h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4zM20 4h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6z"/>',
+ carte:'<rect x="3" y="5" width="12" height="16" rx="2"/><path d="M8 3h11a2 2 0 0 1 2 2v13"/>',
+ grafico:'<path d="M4 20V10M10 20V4M16 20v-7M2 20h20"/>',
+ studia:'<path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/>',
+ sfida:'<path d="M14.5 17.5 3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2M9.5 17.5 21 6V3h-3L6.5 14.5M11 19l-6-6M8 16l-4 4M5 21l-2-2"/>',
+ copia:'<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/>',
+ ingr:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>'
+};
+const svg = (p,cls="") => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const G = g => svg(GL[g]||GL.stella,"g");
+const STAR = on => `<svg class="${on?'':'off'}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7 7 .6-5.4 4.7L18 21l-6-3.6L6 21l1.4-6.7L2 9.6 9 9z"/></svg>`;
+const stars = n => `<span class="stars" aria-label="${n} stelle su 3">${[1,2,3].map(i=>STAR(i<=n)).join("")}</span>`;
+
+/* Elmo, il soldatino */
+function elmoSVG(mood="ok"){
+  const mouth = mood==="sad" ? '<path d="M53 78q7-5 14 0" stroke="#1F1B18" stroke-width="2.5" fill="none" stroke-linecap="round"/>'
+             : mood==="wow" ? '<ellipse cx="60" cy="77" rx="5" ry="4.5" fill="#1F1B18"/>'
+             : '<path d="M52 75q8 7 16 0" stroke="#1F1B18" stroke-width="2.5" fill="none" stroke-linecap="round"/>';
+  return `<svg viewBox="0 0 120 120" aria-hidden="true">
+    <line x1="100" y1="34" x2="100" y2="118" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/>
+    <path d="M100 18l7 18h-14z" fill="var(--ink)"/>
+    <path d="M38 96h44l6 22H32z" fill="var(--sea)"/>
+    <ellipse cx="60" cy="70" rx="19" ry="17" fill="var(--skin)"/>
+    <path d="M28 30Q60 -6 94 30l-6 6Q60 8 34 36z" fill="var(--clay)"/>
+    <path d="M30 80V56Q30 22 60 22T90 56v24H77V60H43v20z" fill="var(--gold)"/>
+    <rect x="57" y="58" width="6" height="12" rx="2" fill="var(--gold)"/>
+    <circle cx="50" cy="67" r="3.2" fill="#1F1B18"/><circle cx="70" cy="67" r="3.2" fill="#1F1B18"/>
+    ${mouth}
+    <circle cx="32" cy="98" r="19" fill="var(--clay)" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="32" cy="98" r="8" fill="var(--gold)"/>
+  </svg>`;
+}
+const elmoSay = (txt,mood) => `<div class="elmo">${elmoSVG(mood)}<div class="bubble"><span class="who">Elmo</span>${txt}</div></div>`;
+
+/* ============ SALVATAGGIO (su questo iPad) ============ */
+const KEY = "iliade-teto-v1";
+const DEF = {pts:0, carte:{}, err:{}, errQ:{}, best:{}, played:0, giuste:0, risposte:0, sfideVinte:0, me:null, set:{timer:true, sec:20, auto:false}};
+let S;
+try { S = Object.assign({}, DEF, JSON.parse(localStorage.getItem(KEY)||"{}")); S.set = Object.assign({}, DEF.set, S.set); } catch(e){ S = JSON.parse(JSON.stringify(DEF)); }
+const save = () => { try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} };
+
+/* ============ VOCE ============ */
+let VOICE=null;
+function pickVoice(){ try{ const vs=speechSynthesis.getVoices().filter(v=>/^it/i.test(v.lang)); VOICE = vs.find(v=>/alice|federica|luca|enhanced|premium/i.test(v.name)) || vs[0] || null; }catch(e){} }
+try{ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }catch(e){}
+function speak(t){
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(t).replace(/[«»]/g,""));
+    u.lang="it-IT"; if(VOICE) u.voice=VOICE; u.rate=.95;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+const spkBtn = (t,big) => `<button class="spk${big?' big':''}" data-say="${esc(t)}" aria-label="Ascolta">${svg(UI.spk)}</button>`;
+
+/* ============ UTILITÀ ============ */
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; };
+const pick = (a,n) => shuffle(a).slice(0,n);
+const grade = p => { let g=GRADES[0], nx=null; for(let i=0;i<GRADES.length;i++){ if(p>=GRADES[i][0]){ g=GRADES[i]; nx=GRADES[i+1]||null; } } return {g,nx}; };
+const capName = c => c ? `Capitolo ${CAPS[c-1].rom}` : "Tutti i capitoli";
+const people = cap => Object.values(P).filter(p => !cap || p.caps.includes(cap));
+const conquer = ids => { let n=0; ids.forEach(id=>{ if(P[id] && !S.carte[id]){ S.carte[id]=1; n++; } }); return n; };
+const oops = ids => ids.forEach(id=>{ S.err[id]=(S.err[id]||0)+1; });
+const pg = p => `pag. ${p}`;
+
+/* ============ NAVIGAZIONE ============ */
+let view = {tab:"cap", cap:null, sub:"riassunto"};
+let filt = "tutti";
+const app = document.getElementById("app");
+
+function header(){
+  document.getElementById("brand").innerHTML = `${elmoSVG()}<h1>L'Iliade <span>di Teto</span></h1>`;
+  const {g} = grade(S.pts);
+  document.getElementById("gradeChip").innerHTML = `<span class="dot">${GRADES.indexOf(g)+1}</span><b>${g[1]}</b><span class="pts">${S.pts} punti</span>`;
+  const T = [["cap","Capitoli",UI.libro],["carte","Carte",UI.carte],["studia","Studia",UI.studia],["sfida","Sfida a due",UI.sfida],["prog","Progressi",UI.grafico]];
+  const gear = document.getElementById("gear"); gear.innerHTML = svg(UI.ingr); gear.setAttribute("aria-current", view.tab==="imp" && !G_STATE);
+  document.getElementById("tabs").innerHTML = T.map(([k,l,i])=>`<button data-tab="${k}" aria-current="${view.tab===k && !G_STATE}">${svg(i)}${l}</button>`).join("");
+}
+function go(v){ stopTimer(); G_STATE=null; document.getElementById("pop").innerHTML=""; if(v.tab && v.tab!=="sfida") duelLeave(); try{speechSynthesis.cancel();}catch(e){} view=Object.assign({},view,v); render(); window.scrollTo(0,0); }
+function render(){
+  header();
+  if(G_STATE) return renderGame();
+  if(view.tab==="cap") return view.cap!==null ? renderChapter() : renderHome();
+  if(view.tab==="carte") return renderCards();
+  if(view.tab==="prog") return renderProgress();
+  if(view.tab==="imp") return renderSettings();
+  if(view.tab==="studia") return renderStudy();
+  if(view.tab==="sfida") return renderDuel();
+}
+
+/* ---------- Capitoli ---------- */
+function bestOf(cap,game){ return (S.best[cap]||{})[game]||0; }
+function renderHome(){
+  const tot = Object.keys(P).length, got = Object.keys(S.carte).length;
+  const hello = S.played===0
+    ? "Ciao Teto! Sono Elmo. Leggi il riassunto del capitolo, poi mettiti alla prova con i giochi. Ogni risposta giusta ti fa conquistare una carta."
+    : `Bentornato, ${grade(S.pts).g[1]}! Hai conquistato ${got} carte su ${tot}. Andiamo avanti?`;
+  const nErr = Object.keys(S.errQ).length;
+  const quest = `<section class="quest"><div class="tx"><span class="lab">SFIDA DI ELMO</span><h3>${esc(CH.txt)}</h3><p>Fai almeno l'80% dei punti e vinci 20 punti bonus. Ogni volta che entri, Elmo ne prepara una nuova.</p></div><button class="btn" data-quest>Accetta la sfida</button></section>`;
+  const errs = nErr ? `<section class="quest" style="background:var(--clay-soft); color:var(--ink)"><div class="tx"><span class="lab" style="color:var(--clay)">DA SISTEMARE</span><h3 style="color:var(--ink)">${nErr} ${nErr===1?"domanda sbagliata":"domande sbagliate"}</h3><p>Rifalle finché non le indovini al primo colpo.</p></div><button class="btn" style="background:var(--clay); color:#fff" data-play="errori" data-scope="0">Allenati sui tuoi errori</button></section>` : "";
+  const totStars = c => Object.keys(GAMES).reduce((a,k)=>a+bestOf(c,k),0), maxStars = Object.keys(GAMES).length*3;
+  app.innerHTML = elmoSay(hello) + quest + errs + CAPS.slice().reverse().map(c=>`
+    <button class="chap" data-cap="${c.n}">
+      <div class="meander"></div>
+      <div class="in">
+        <div class="rom">${c.rom}</div>
+        <h2>Capitolo ${c.rom}</h2>
+        <div class="sec">${c.sezioni.join(" · ")}</div>
+        <div class="metaRow">
+          <span class="chip ${c.stato==="completo"?"":"run"}">${c.stato==="completo"?"Completo":"In corso · fino a pag. "+c.fino}</span>
+          <span>${c.pag}</span>
+          <span class="stars">${STAR(true)}</span><span>${totStars(c.n)}/${maxStars} stelle</span>
+        </div>
+      </div>
+    </button>`).join("") + `
+    <button class="chap" data-cap="0">
+      <div class="meander" style="--c:var(--ink)"></div>
+      <div class="in">
+        <div class="rom" style="color:var(--ink)">∗</div>
+        <h2>Ripasso misto</h2>
+        <div class="sec">Domande e personaggi di tutti i capitoli insieme</div>
+        <div class="metaRow"><span class="stars">${STAR(true)}</span><span>${totStars("all")}/${maxStars} stelle</span></div>
+      </div>
+    </button>`;
+}
+function renderChapter(){
+  const c = view.cap===0 ? null : CAPS[view.cap-1];
+  const subs = c ? [["riassunto","Riassunto"],["personaggi","Personaggi"],["giochi","Giochi"]] : [["giochi","Giochi"]];
+  if(!c) view.sub="giochi";
+  let body="";
+  if(view.sub==="riassunto"){
+    let lastSec="", n=0;
+    const all = c.punti.map(p=>p.t).join(" ");
+    body = `<div class="btnRow">${spkBtn(all,true)}<span class="muted">Ascolta tutto il riassunto</span></div><div class="sum">` + c.punti.map(p=>{
+      n++;
+      const h = p.sec!==lastSec ? `<h3>${esc(p.sec)}</h3>` : ""; lastSec=p.sec;
+      const nm = p.chi.length ? `<div class="names">${p.chi.map(id=>`<button class="name t-${P[id].t}" data-card="${id}"><i></i>${esc(P[id].n)}</button>`).join("")}</div>` : "";
+      return `${h}<div class="pt"><div class="n">${n}</div><p>${linkWords(p.t)}<span class="pg">${pg(p.pag)}</span>${nm}</p>${spkBtn(p.t)}</div>`;
+    }).join("") + `</div>
+    ${c.stato!=="completo" ? elmoSay(`Il capitolo ${c.rom} continua: per ora arriviamo fino a pagina ${c.fino}.`) : ""}
+    <div class="btnRow"><button class="btn" data-sub="giochi">Ho letto: andiamo a giocare</button></div>`;
+  } else if(view.sub==="personaggi"){
+    body = cardGrid(people(c.n));
+  } else {
+    const key = c ? c.n : "all";
+    body = `<div class="games">${Object.entries(GAMES).map(([k,g])=>`
+      <button class="game" data-play="${k}">
+        <span class="ic">${svg(GL[g.ic])}</span>
+        <h3>${g.n}</h3><p>${g.d}</p>${stars(bestOf(key,k))}
+      </button>`).join("")}</div>`;
+  }
+  app.innerHTML = `
+    <button class="back" data-home>${svg(UI.back)}Tutti i capitoli</button>
+    <div class="pageHead"><h2>${c ? "Capitolo "+c.rom : "Ripasso misto"}</h2><p>${c ? c.sezioni.join(" · ")+" — "+c.pag : "Tutto quello che abbiamo letto finora"}</p></div>
+    ${subs.length>1 ? `<div class="sub">${subs.map(([k,l])=>`<button data-sub="${k}" aria-current="${view.sub===k}">${l}</button>`).join("")}</div>` : ""}
+    ${body}`;
+}
+
+/* ---------- Carte ---------- */
+function cardHTML(p){
+  return `<button class="card t-${p.t}${p.liv===2?' minor':''}" data-card="${p.id}">
+    <div class="meander"></div>
+    ${S.carte[p.id] ? `<span class="won" aria-label="Conquistata">${STAR(true)}</span>` : ""}
+    <div class="face">${G(p.g)}</div>
+    <div class="tx"><span class="tm">${esc(p.tl||TEAM[p.t])}</span><span class="nm">${esc(p.n)}</span><span class="ch">${esc(p.chi)}</span></div>
+  </button>`;
+}
+function cardGrid(list){
+  const main = list.filter(p=>p.liv===1 && !["oggetto","luogo"].includes(p.t));
+  const minor = list.filter(p=>p.liv===2 && !["oggetto","luogo"].includes(p.t));
+  const things = list.filter(p=>["oggetto","luogo"].includes(p.t));
+  const blk = (lab,arr) => arr.length ? `<div class="secLabel">${lab}<small>${arr.filter(p=>S.carte[p.id]).length}/${arr.length} conquistate</small></div><div class="grid">${arr.map(cardHTML).join("")}</div>` : "";
+  return blk("Personaggi principali",main) + blk("Personaggi minori",minor) + blk("Oggetti e luoghi",things);
+}
+function renderCards(){
+  const F = [["tutti","Tutti"],["dei","Dèi"],["greci","Greci"],["troiani","Troiani"],["altri","Altri"],["cose","Oggetti e luoghi"]];
+  const list = Object.values(P).filter(p => filt==="tutti" || (filt==="cose" ? ["oggetto","luogo"].includes(p.t) : p.t===filt));
+  const got = Object.keys(S.carte).length, tot=Object.keys(P).length;
+  app.innerHTML = `
+    <div class="pageHead"><h2>Le carte</h2><p>Ne hai conquistate ${got} su ${tot}. Le conquisti rispondendo bene nei giochi. Tocca una carta per leggerla.</p></div>
+    <div class="filters">${F.map(([k,l])=>`<button data-filt="${k}" aria-pressed="${filt===k}">${l}</button>`).join("")}</div>
+    ${cardGrid(list)}`;
+}
+function openCard(id){
+  const p=P[id]; const txt = `${p.n}. ${p.chi}. ` + p.f.map(f=>f[0]).join(" ");
+  const caps = p.caps.map(c=>"Cap. "+CAPS[c-1].rom).join(", ");
+  document.getElementById("sheet").innerHTML = `
+    <div class="sheet" data-close>
+      <div class="box t-${p.t}" role="dialog" aria-label="${esc(p.n)}">
+        <div class="meander"></div>
+        <div class="hd">${G(p.g)}<div style="flex:1;min-width:0"><span class="tm">${esc(p.tl||TEAM[p.t])}${p.liv===2?" · minore":""}</span><h2>${esc(p.n)}</h2></div>${spkBtn(txt)}</div>
+        <div class="bd">
+          <p style="margin:0;font-weight:500">${esc(p.chi)}</p>
+          <ul>${p.f.map(f=>`<li>${esc(f[0])}<small>${pg(f[1])}</small></li>`).join("")}</ul>
+          <div class="status">${S.carte[id] ? STAR(true)+" Carta conquistata" : "Non ancora conquistata: rispondi bene su "+esc(p.n)+" in un gioco."} · ${caps}</div>
+          <button class="btn dark" data-close>Chiudi</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ---------- Progressi ---------- */
+function renderProgress(){
+  const {g,nx} = grade(S.pts);
+  const pct = nx ? Math.round((S.pts-g[0])/(nx[0]-g[0])*100) : 100;
+  const got = Object.keys(S.carte).length, tot=Object.keys(P).length;
+  const acc = S.risposte ? Math.round(S.giuste/S.risposte*100) : 0;
+  const weak = Object.entries(S.err).sort((a,b)=>b[1]-a[1]).slice(0,8).filter(([id])=>P[id]);
+  const rows = [...CAPS.map(c=>[c.n,"Capitolo "+c.rom]),["all","Ripasso misto"]];
+  app.innerHTML = `
+    <div class="pageHead"><h2>I miei progressi</h2></div>
+    <section class="panel">
+      <div class="rank"><div class="medal">${GRADES.indexOf(g)+1}</div><div><h2>${g[1]}</h2><span class="muted">${S.pts} punti${nx?` · ancora ${nx[0]-S.pts} per diventare ${nx[1]}`:" · grado massimo!"}</span></div></div>
+      <div class="bar"><i style="width:${pct}%"></i></div>
+    </section>
+    <div class="stats">
+      <div class="stat"><b>${got}/${tot}</b><span>carte conquistate</span></div>
+      <div class="stat"><b>${S.played}</b><span>partite giocate</span></div>
+      <div class="stat"><b>${acc}%</b><span>risposte giuste</span></div>
+      <div class="stat"><b>${S.sfideVinte}</b><span>sfide di Elmo vinte</span></div>
+    </div>
+    ${Object.keys(S.errQ).length ? `<section class="panel"><h3>Domande da sistemare: ${Object.keys(S.errQ).length}</h3><div class="btnRow"><button class="btn" data-play="errori" data-scope="0">Allenati sui tuoi errori</button></div></section>` : ""}
+    <section class="panel"><h3>Stelle per capitolo</h3>
+      <div class="tbl"><table><thead><tr><th></th>${Object.values(GAMES).map(x=>`<th>${x.n}</th>`).join("")}</tr></thead>
+      <tbody>${rows.map(([k,l])=>`<tr><td><b>${l}</b></td>${Object.keys(GAMES).map(gk=>`<td>${stars(bestOf(k,gk))}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+    </section>
+    <section class="panel"><h3>Da ripassare</h3>
+      ${weak.length ? `<p class="muted" style="margin:0">Su questi hai sbagliato più spesso. Tocca per rileggere la carta.</p><div class="names">${weak.map(([id,n])=>`<button class="name t-${P[id].t}" data-card="${id}"><i></i>${esc(P[id].n)} · ${n}</button>`).join("")}</div>` : `<p class="muted" style="margin:0">Ancora niente da ripassare. Gioca qualche partita!</p>`}
+    </section>
+    <section class="panel"><h3>I gradi dell'esercito</h3>
+      <ul class="grades">${GRADES.map(x=>`<li class="${x===g?'me':(S.pts>=x[0]?'done':'')}"><span>${x[1]}</span><span>${x[0]} punti</span></li>`).join("")}</ul>
+    </section>`;
+}
+
+/* ---------- Impostazioni ---------- */
+let confirmReset=false;
+function renderSettings(){
+  app.innerHTML = `
+    <div class="pageHead"><h2>Impostazioni</h2></div>
+    <section class="panel">
+      <div class="setRow"><p>Timer<small>Il tempo per rispondere in tutti i giochi, tranne Abbinamenti e Sfida a due.</small></p><button class="sw" role="switch" aria-checked="${S.set.timer}" data-set="timer" aria-label="Timer"></button></div>
+      <div class="setRow"><p>Secondi per domanda</p><div class="seg">${[15,20,30].map(s=>`<button data-sec="${s}" aria-pressed="${S.set.sec===s}">${s}</button>`).join("")}</div></div>
+      <div class="setRow"><p>Leggi le domande ad alta voce<small>Elmo legge ogni domanda appena compare.</small></p><button class="sw" role="switch" aria-checked="${S.set.auto}" data-set="auto" aria-label="Lettura automatica"></button></div>
+      <div class="setRow"><p>Prova la voce</p>${spkBtn("Ciao Teto! Sono Elmo, il tuo soldatino. Pronto per l'Iliade?")}</div>
+    </section>
+    <section class="panel">
+      <div class="setRow"><p>Ricomincia da zero<small>Cancella punti, stelle e carte conquistate su questo iPad.</small></p>
+      ${confirmReset ? `<div class="btnRow"><button class="btn" data-reset="yes">Sì, cancella</button><button class="btn ghost" data-reset="no">No</button></div>` : `<button class="btn ghost" data-reset="ask">Cancella</button>`}</div>
+    </section>`;
+}
+
+/* ============ GIOCHI ============ */
+let G_STATE=null, T_RAF=null;
+function stopTimer(){ if(T_RAF) cancelAnimationFrame(T_RAF); T_RAF=null; }
+function startTimer(onEnd){
+  stopTimer();
+  const bar = document.querySelector(".timer i"); if(!S.set.timer || !bar) return;
+  const dur = S.set.sec*1000, end = Date.now()+dur;
+  const tick = () => {
+    const left = end-Date.now();
+    bar.style.transform = `scaleX(${Math.max(0,left/dur)})`;
+    bar.parentNode.classList.toggle("low", left<5000);
+    if(left<=0){ T_RAF=null; onEnd(); return; }
+    T_RAF = requestAnimationFrame(tick);
+  };
+  T_RAF = requestAnimationFrame(tick);
+}
+const PRAISE = ["Bravo! Risposta giusta.","Esatto! Sei un vero eroe.","Perfetto! Nemmeno Achille faceva meglio.","Giusto! Atena sarebbe fiera di te.","Ottimo, colpo da arciere!"];
+const RETRY = ["Quasi! Hai un'altra possibilità.","Non è questa. Riprova!","Ops! Pensaci ancora un attimo."];
+const rnd = a => a[Math.floor(Math.random()*a.length)];
+
+const isQuiz = t => t==="quiz" || t==="errori";
+const CHARS = cap => people(cap).filter(p=>!["oggetto","luogo"].includes(p.t));
+const mapPool = cap => MAPP.filter(m=>!cap || P[m.id].caps.includes(cap));
+const wordPool = cap => PAROLE.filter(w=>!cap || w.caps.includes(cap));
+function mkOpts(right, others, label){ const all=shuffle([right,...others]); return {labels:all.map(label), okIdx:all.indexOf(right)}; }
+
+function startGame(type, o={}){
+  const cap = o.cap!==undefined ? o.cap : (view.cap || 0);
+  const g = {type, cap, i:0, tries:0, score:0, done:false, wrong:[], msg:null, mood:"ok", picked:[], sfida:o.sfida||null};
+  if(isQuiz(type)){
+    const pool = type==="errori" ? QS.filter(q=>S.errQ[q.q]) : QS.filter(q=>!cap||q.cap===cap);
+    g.items = pick(pool, o.n||10).map(q=>{ const x=mkOpts(q.o[0], q.o.slice(1), s=>s); return {...q, ...x}; }); g.per=10;
+  } else if(type==="chi"){
+    const pool = people(cap);
+    g.items = pick(pool, o.n||8).map(p=>{
+      const thing = ["oggetto","luogo"].includes(p.t);
+      const same = pool.filter(x=>x.id!==p.id && ["oggetto","luogo"].includes(x.t)===thing);
+      return {p, clue:1, ...mkOpts(p, pick(same,3), x=>x.n)};
+    }); g.per=15;
+  } else if(type==="detto"){
+    const chars = CHARS(cap);
+    g.items = pick(DETTI.filter(d=>!cap||d.cap===cap), o.n||8).map(d=>({d, ...mkOpts(P[d.id], pick(chars.filter(x=>x.id!==d.id),3), x=>x.n)})); g.per=10;
+  } else if(type==="parole"){
+    const pool = wordPool(cap), all = PAROLE;
+    g.items = pick(pool, o.n||8).map(w=>({w, ...mkOpts(w, pick(all.filter(x=>x.id!==w.id),3), x=>x.d)})); g.per=10;
+  } else if(type==="luoghi"){
+    g.items = pick(mapPool(cap), o.n||6).map(m=>({m})); g.per=10;
+  } else if(type==="squadre"){
+    g.items = pick(people(cap).filter(p=>p.sq), o.n||10).map(p=>({p})); g.per=10;
+  } else if(type==="abbina"){
+    const all = pick(people(cap), o.n||8);
+    g.rounds = [all.slice(0,4), all.slice(4,8)].filter(r=>r.length);
+    g.items = g.rounds; g.sel=null; g.matched={}; g.misses={};
+    g.right = shuffle(g.rounds[0]);
+  }
+  if(!g.items.length){ return; }
+  G_STATE = g; render(); window.scrollTo(0,0);
+}
+
+function optList(g, it, big){
+  return `<div class="opts">${it.labels.map((l,k)=>{
+    const cls = g.picked.includes(k) ? (k===it.okIdx?"ok":"ko"+(k===g.picked[g.picked.length-1]?" shake":"")) : (g.answered && k===it.okIdx ? "ok" : "");
+    return `<button class="opt ${cls}" data-opt="${k}" ${g.answered||g.picked.includes(k)?"disabled":""} ${big?'':'style="font-size:16px"'}>${esc(l)}</button>`;}).join("")}</div>`;
+}
+function renderGame(){
+  const g=G_STATE;
+  if(g.done) return renderEnd();
+  const total = g.items.length;
+  const title = g.type==="errori" ? "Allenati sui tuoi errori" : GAMES[g.type].n;
+  const hud = `<div class="hud"><span>${title} · ${g.type==="errori"?"tutti i capitoli":capName(g.cap)}</span><span>${g.type==="abbina"?"Gruppo":"Domanda"} <b>${g.i+1}</b> di ${total} · <b>${g.score}</b> punti</span></div>`;
+  const timer = (S.set.timer && g.type!=="abbina") ? `<div class="timer"><i></i></div>` : "";
+  const fb = g.msg ? `<div class="expl ${g.msg.k}">${g.msg.t}${g.msg.s?`<small>${g.msg.s}</small>`:""}</div>` : "";
+  const next = g.answered ? `<div class="btnRow"><button class="btn" data-next>${g.i+1<total?"Avanti":"Vedi il risultato"}</button></div>` : "";
+  let body="", say="";
+  const it = g.items[g.i];
+  if(isQuiz(g.type)){
+    say=it.q;
+    body = `<div class="qrow"><div class="q">${esc(it.q)}</div>${spkBtn(it.q+" "+it.labels.join(", "))}</div>${optList(g,it,true)}`;
+  } else if(g.type==="chi"){
+    const shown = it.p.ind.slice(0,it.clue);
+    say = "Chi sono? "+shown.join(" ");
+    body = `<div class="qrow"><div class="q">Chi sono?</div>${spkBtn(say)}</div>
+      <ul class="clues">${shown.map((c,k)=>`<li><b>${k+1}</b><span>${esc(c)}</span></li>`).join("")}</ul>
+      ${!g.answered && it.clue<3 ? `<div class="btnRow"><button class="btn ghost" data-clue>Voglio un altro indizio (vale meno punti)</button></div>` : ""}
+      ${optList(g,it,true)}`;
+  } else if(g.type==="detto"){
+    say = `${it.d.ctx} Chi dice: ${it.d.fr}`;
+    body = `<div class="qrow"><div class="q">Chi l'ha detto?</div>${spkBtn(say)}</div>
+      <p class="muted" style="margin:0">${esc(it.d.ctx)}</p>
+      <div class="bubble" style="font-size:21px; border-radius:18px">«${esc(it.d.fr)}»</div>
+      ${optList(g,it,true)}`;
+  } else if(g.type==="parole"){
+    say = `Che cosa vuol dire ${it.w.w}?`;
+    body = `<div class="qrow"><div class="q">Che cosa vuol dire «${esc(it.w.w)}»?</div>${spkBtn(say+" "+it.labels.join(". "))}</div>${optList(g,it,false)}`;
+  } else if(g.type==="luoghi"){
+    say = `Dov'è ${P[it.m.id].n}?`;
+    const marks={}; g.picked.forEach(id=>marks[id]= id===it.m.id?"ok":"ko"); if(g.answered) marks[it.m.id]="ok";
+    body = `<div class="qrow"><div class="q">Dov'è ${esc(P[it.m.id].n)}? Toccalo sulla mappa.</div>${spkBtn(say)}</div>
+      <div class="mapWrap">${mapSVG({labels:false, marks, only:mapPool(g.cap).map(m=>m.id)})}</div>`;
+  } else if(g.type==="squadre"){
+    say=it.p.n;
+    const B=[["dei","Dèi","fulmine"],["greci","Greci","elmo"],["troiani","Troiani","mura"]];
+    body = `<div class="qrow"><div class="q">In quale squadra va?</div>${spkBtn(it.p.n)}</div>
+      <div class="bigName">${esc(it.p.n)}</div>
+      <div class="bins">${B.map(([k,l,ic])=>{
+        const cls = g.picked.includes(k) ? (k===it.p.sq?"ok":"ko") : (g.answered && k===it.p.sq ? "ok":"");
+        return `<button class="bin t-${k} ${cls}" data-bin="${k}" ${g.answered||g.picked.includes(k)?"disabled":""}>${svg(GL[ic])}${l}</button>`;}).join("")}</div>`;
+  } else if(g.type==="abbina"){
+    body = `<div class="q" style="font-size:22px">Tocca un nome, poi la sua descrizione.</div>
+      <div class="match">
+        <div class="col">${it.map(p=>`<button class="mt nm ${g.matched[p.id]?"done":""} ${g.sel===p.id?"sel":""}" data-l="${p.id}" ${g.matched[p.id]?"disabled":""}>${esc(p.n)}</button>`).join("")}</div>
+        <div class="col">${g.right.map(p=>`<button class="mt ${g.matched[p.id]?"done":""}" data-r="${p.id}" ${g.matched[p.id]?"disabled":""}>${esc(p.chi)}</button>`).join("")}</div>
+      </div>`;
+  }
+  const sfidaTxt = g.sfida ? `<div class="chip run" style="align-self:flex-start">Sfida di Elmo: ${esc(g.sfida.txt)}</div>` : "";
+  app.innerHTML = `<button class="back" data-quit>${svg(UI.back)}Esci dal gioco</button>
+    <section class="play">${sfidaTxt}${hud}${timer}${body}${fb}${next}</section>
+    ${elmoSay(g.elmo || (g.type==="abbina"?"Collega ogni nome alla frase giusta. Se sbagli, riprova!":"Leggi bene e scegli. Se sbagli hai una seconda possibilità."), g.mood)}`;
+  if(!g.answered && g.type!=="abbina"){
+    startTimer(()=>timeUp());
+    if(S.set.auto && g.said!==g.i){ g.said=g.i; speak(say); }
+  }
+}
+
+function award(ids, first){
+  const g=G_STATE;
+  const pts = g.type==="chi" ? [15,10,5][g.items[g.i].clue-1] - (first?0:5) : (first?10:5);
+  const gain = Math.max(pts, 2);
+  g.score += gain; S.pts += gain; S.giuste++; S.risposte++;
+  const n = conquer(ids);
+  return {gain, n};
+}
+function finishItem(ok, ids, expl, pag){
+  const g=G_STATE; stopTimer(); g.answered=true;
+  if(isQuiz(g.type)){ const key=g.items[g.i].q; if(ok && g.tries===0) delete S.errQ[key]; else S.errQ[key]=(S.errQ[key]||0)+1; }
+  if(ok){
+    const {gain,n} = award(ids, g.tries===0);
+    g.mood="wow"; g.elmo = rnd(PRAISE) + (n ? ` Hai conquistato ${n===1?"una nuova carta":n+" nuove carte"}!` : "");
+    g.msg = {k:"ok", t:`+${gain} punti. ${esc(expl)}`, s:pg(pag)};
+  } else {
+    S.risposte++; oops(ids);
+    g.mood="sad"; g.elmo="Niente paura, adesso lo sai! Ricordatelo per la prossima volta.";
+    g.msg = {k:"ko", t:esc(expl), s:"Lo trovi a "+pg(pag)};
+    g.wrong.push({t:expl, pag});
+  }
+  save(); render();
+}
+function retry(msg){
+  const g=G_STATE; g.tries=1; g.mood="sad"; g.elmo = msg || rnd(RETRY); render();
+}
+function itemInfo(){
+  const g=G_STATE, it=g.items[g.i];
+  if(isQuiz(g.type)) return {ids:it.chi, expl:it.sp, pag:it.pag, right:it.o[0]};
+  if(g.type==="chi") return {ids:[it.p.id], expl:`${it.p.n}: ${it.p.chi.charAt(0).toLowerCase()+it.p.chi.slice(1)}.`, pag:it.p.f[0][1], right:it.p.n};
+  if(g.type==="detto") return {ids:[it.d.id], expl:`Lo dice ${P[it.d.id].n}. ${it.d.ctx}`, pag:it.d.pag, right:P[it.d.id].n};
+  if(g.type==="parole") return {ids:[], expl:`«${it.w.w}»: ${it.w.d}`, pag:it.w.pag, right:it.w.d};
+  if(g.type==="luoghi") return {ids:[it.m.id], expl:`${P[it.m.id].n}: ${it.m.geo}`, pag:P[it.m.id].f[0][1], right:"il puntino verde"};
+  if(g.type==="squadre") return {ids:[it.p.id], expl:`${it.p.n} sta con i ${TEAM[it.p.sq]}. ${it.p.f[0][0]}`, pag:it.p.f[0][1], right:TEAM[it.p.sq]};
+}
+function answer(correct){
+  const g=G_STATE, inf=itemInfo();
+  if(correct) return finishItem(true, inf.ids, inf.expl, inf.pag);
+  if(g.tries===0){
+    if(g.type==="chi"){ const it=g.items[g.i]; if(it.clue<3){ it.clue++; return retry("Non sono io! Ti regalo un altro indizio: riprova."); } }
+    if(g.type==="luoghi") return retry("Non è lì! Guarda bene la mappa e riprova.");
+    return retry();
+  }
+  finishItem(false, inf.ids, g.type==="luoghi" ? `Era il puntino verde. ${inf.expl}` : `La risposta giusta era: ${inf.right}. ${inf.expl}`, inf.pag);
+}
+function timeUp(){
+  const g=G_STATE; if(!g || g.answered) return;
+  if(g.tries===0){
+    if(g.type==="chi"){ const it=g.items[g.i]; if(it.clue<3) it.clue++; }
+    return retry("Tempo scaduto! Hai un'altra possibilità.");
+  }
+  const inf=itemInfo();
+  finishItem(false, inf.ids, `Tempo scaduto. ${g.type==="luoghi"?"Era il puntino verde.":"La risposta giusta era: "+inf.right+"."} ${inf.expl}`, inf.pag);
+}
+function nextItem(){
+  const g=G_STATE;
+  if(g.i+1 >= g.items.length) return endGame();
+  g.i++; g.tries=0; g.answered=false; g.msg=null; g.picked=[]; g.mood="ok"; g.elmo=null;
+  if(g.type==="abbina"){ g.sel=null; g.right=shuffle(g.rounds[g.i]); }
+  render(); window.scrollTo(0,0);
+}
+function matchTap(side,id){
+  const g=G_STATE;
+  if(side==="l"){ g.sel=id; return render(); }
+  if(!g.sel){ g.elmo="Prima tocca un nome a sinistra."; return render(); }
+  if(g.sel===id){
+    const miss=g.misses[id]||0, gain=miss===0?10:miss===1?5:2;
+    g.matched[id]=true; g.score+=gain; S.pts+=gain; S.giuste++; S.risposte++;
+    const n=conquer([id]); g.mood="wow"; g.elmo=`Giusto: ${P[id].n}! +${gain}` + (n?" e una nuova carta!":"");
+    g.sel=null;
+    if(g.rounds[g.i].every(p=>g.matched[p.id])){ g.answered=true; g.elmo += " Gruppo completato!"; }
+  } else {
+    g.misses[g.sel]=(g.misses[g.sel]||0)+1; S.risposte++;
+    if(g.misses[g.sel]===2){ oops([g.sel]); g.wrong.push({t:`${P[g.sel].n}: ${P[g.sel].chi}.`, pag:P[g.sel].f[0][1]}); }
+    g.mood="sad"; g.elmo=`No, quella frase non è di ${P[g.sel].n}. Riprova!`;
+  }
+  save(); render();
+}
+function endGame(){
+  const g=G_STATE; stopTimer();
+  const max = g.type==="abbina" ? g.rounds.flat().length*10 : g.items.length*g.per;
+  const r = g.score/max, st = r>=.85?3:r>=.55?2:1;
+  let prev=0;
+  if(!g.sfida && GAMES[g.type]){
+    const key = g.cap||"all";
+    S.best[key]=S.best[key]||{}; prev=S.best[key][g.type]||0;
+    if(st>prev) S.best[key][g.type]=st;
+  }
+  if(g.sfida){ g.sfidaVinta = r>=.8; if(g.sfidaVinta){ S.pts+=20; g.score+=20; S.sfideVinte++; } CH=newChallenge(); }
+  S.played++;
+  g.done=true; g.stars=st; g.max=max; g.record = !g.sfida && GAMES[g.type] && st>prev;
+  save(); render();
+}
+function renderEnd(){
+  const g=G_STATE, {g:gr}=grade(S.pts), before=grade(S.pts-g.score).g;
+  const up = gr!==before;
+  const left = Object.keys(S.errQ).length;
+  let msg = g.stars===3 ? "Fantastico! Tre stelle, sei un vero eroe dell'Iliade!" : g.stars===2 ? "Bella partita! Ancora un po' e arrivano le tre stelle." : "Ogni guerriero si allena. Rileggi il riassunto e riprova!";
+  if(g.type==="errori") msg = left ? `Ti restano ${left} domande da sistemare. Un'altra passata?` : "Hai sistemato tutti i tuoi errori. Grande!";
+  const title = g.type==="errori" ? "Allenamento finito!" : `${GAMES[g.type].n} finito!`;
+  const sf = g.sfida ? `<div class="promo">${g.sfidaVinta ? "Sfida di Elmo vinta! +20 punti bonus" : "Sfida non riuscita: serviva almeno l'80% dei punti. Elmo ne ha pronta un'altra!"}</div>` : "";
+  const btns = g.sfida
+    ? `<button class="btn" data-quest>Nuova sfida</button><button class="btn ghost" data-tab="cap">Torna ai capitoli</button>`
+    : g.type==="errori"
+    ? `${left?`<button class="btn" data-again>Allenati ancora</button>`:""}<button class="btn ghost" data-tab="cap">Torna ai capitoli</button>`
+    : `<button class="btn" data-again>Gioca ancora</button><button class="btn ghost" data-backcap>Torna ai giochi</button>`;
+  app.innerHTML = `<section class="play end">
+      <div class="bigstars">${[1,2,3].map(i=>STAR(i<=g.stars)).join("")}</div>
+      <h2>${title}</h2>
+      <div class="score"><b>${g.score}</b> punti${g.record?" · nuovo record!":""}</div>
+      ${sf}
+      ${up ? `<div class="promo">Promozione! Adesso sei ${gr[1]}.</div>` : ""}
+      ${g.wrong.length ? `<div class="review"><b>Da ricordare</b>${g.wrong.map(w=>`<div>${esc(w.t)} <small>${pg(w.pag)}</small></div>`).join("")}</div>` : ""}
+      <div class="btnRow" style="justify-content:center">${btns}</div>
+    </section>
+    ${elmoSay(msg, g.stars>=2?"wow":"ok")}`;
+}
+
+/* ============ SFIDA DI ELMO (nuova a ogni visita) ============ */
+function newChallenge(){
+  const T = [["quiz",5,"5 domande lampo"],["chi",3,"indovina 3 personaggi"],["detto",5,"Chi l'ha detto? 5 frasi"],["luoghi",4,"trova 4 luoghi sulla mappa"],["parole",5,"5 parole difficili"],["squadre",6,"schiera 6 personaggi"],["abbina",8,"8 abbinamenti senza errori"]];
+  let last=""; try{ last=localStorage.getItem("iliade-last-ch")||""; }catch(e){}
+  let t, cap, tries=0;
+  do{
+    t = rnd(T); cap = rnd([...CAPS.map(c=>c.n), 0]); tries++;
+  } while(tries<20 && (t[0]===last || (t[0]==="luoghi" && mapPool(cap).length<t[1]) || (t[0]==="detto" && DETTI.filter(d=>!cap||d.cap===cap).length<t[1])));
+  try{ localStorage.setItem("iliade-last-ch", t[0]); }catch(e){}
+  const txt = t[2].charAt(0).toUpperCase()+t[2].slice(1) + " · " + capName(cap);
+  return {type:t[0], n:t[1], cap, txt};
+}
+let CH = newChallenge();
+
+/* ============ STUDIA: famiglie, mappa, parole ============ */
+const FEM = ["elena","criseide","ermione","andromaca","teti","era","afrodite","ecuba","gea","temi","atena","eris"];
+function famNode(id){ const p=P[id]; return `<button class="fn t-${p.t}" data-card="${id}">${G(p.g)}<span>${esc(p.n)}</span></button>`; }
+function famHTML(u){
+  let h = `<div class="fam"><h3>${esc(u.t)}</h3>`;
+  if(u.nonno) h += `${famNode(u.nonno[0])}<div class="vlab">${esc(u.nonno[1])}</div><div class="vline"></div>`;
+  if(u.lato) h += `<div class="frow" style="margin-bottom:12px; padding:6px 10px; border:1px dashed var(--line); border-radius:14px">${famNode(u.lato[0])}<span class="link">${esc(u.lato[1])}</span></div>`;
+  h += `<div class="frow">${famNode(u.gen[0])}${u.gen[1]?`<span class="link heart">♥<br>${esc(u.leg||"")}</span>${famNode(u.gen[1])}`:""}</div>`;
+  if(u.figli.length){
+    const lab = u.figli.length>1 ? "figli" : (FEM.includes(u.figli[0]) ? "figlia" : "figlio");
+    h += `<div class="vline"></div><div class="vlab">${lab}</div><div class="frow">${u.figli.map(famNode).join("")}</div>`;
+  }
+  h += `<ul>${u.note.map(n=>`<li>${esc(n[0])} <small>${pg(n[1])}</small></li>`).join("")}</ul></div>`;
+  return h;
+}
+const MX = lon => +((lon-21)*79).toFixed(1), MY = lat => +((41.5-lat)*100).toFixed(1);
+function mapSVG(o){
+  const only = o.only || MAPP.map(m=>m.id);
+  const land = LAND.map(poly=>`<path class="land" d="M${poly.map(([a,b])=>MX(a)+" "+MY(b)).join("L")}Z"/>`).join("");
+  const route = o.route ? `<path class="route" d="M${ROTTA.map(([a,b])=>MX(a)+" "+MY(b)).join("L")}"/>` : "";
+  const pins = MAPP.filter(m=>only.includes(m.id)).map(m=>{
+    const x=MX(m.lon), y=MY(m.lat), st=(o.marks||{})[m.id]||"";
+    let lab="";
+    if(o.labels){
+      const [tx,ty,an] = m.lp==="l" ? [x-14,y+6,"end"] : m.lp==="b" ? [x,y+30,"middle"] : m.lp==="t" ? [x,y-16,"middle"] : [x+14,y+6,"start"];
+      lab = `<text x="${tx}" y="${ty}" text-anchor="${an}">${esc(P[m.id].n)}</text>`;
+    }
+    return `<g class="pin ${st} ${o.sel===m.id?"sel":""}" data-mp="${m.id}" role="button" aria-label="${o.labels?esc(P[m.id].n):"Luogo"}"><circle class="hit" cx="${x}" cy="${y}" r="24"/><circle class="dot" cx="${x}" cy="${y}" r="${o.sel===m.id?11:9}"/>${lab}</g>`;
+  }).join("");
+  return `<svg class="map" viewBox="0 0 593 670" role="img" aria-label="Mappa della Grecia e di Troia">
+    <rect class="sea" x="0" y="0" width="593" height="670"/>${land}
+    <text class="landlab" x="${MX(21.5)}" y="${MY(39.7)}">GRECIA</text>
+    <text class="landlab" x="${MX(27.3)}" y="${MY(38.85)}">ASIA</text>
+    ${route}${pins}</svg>`;
+}
+function renderStudy(){
+  const st = view.st || "fam";
+  const subs = [["fam","Famiglie"],["mappa","Mappa"],["parole","Parole difficili"]];
+  let body="";
+  if(st==="fam"){
+    body = elmoSay("Ecco chi è parente di chi. Tocca un nome per aprire la sua carta.") + `<div class="fams">${FAM.map(famHTML).join("")}</div>`;
+  } else if(st==="mappa"){
+    const sel = view.mapSel ? MAPP.find(m=>m.id===view.mapSel) : null;
+    const info = sel ? `<div class="placeInfo"><div><h3>${esc(P[sel.id].n)}</h3><p><b>Dove si trova:</b> ${esc(sel.geo)}</p>${P[sel.id].f.map(f=>`<p>${esc(f[0])} <small>${pg(f[1])}</small></p>`).join("")}<div class="btnRow" style="margin-top:8px"><button class="btn ghost" data-card="${sel.id}">Apri la carta</button></div></div>${spkBtn(P[sel.id].n+". "+sel.geo+" "+P[sel.id].f.map(f=>f[0]).join(" "))}</div>`
+      : elmoSay("Tocca un puntino per sapere che posto è e che cosa succede lì nella storia.");
+    body = `<div class="btnRow"><button class="btn ${view.route?"dark":"ghost"}" data-route>${view.route?"Nascondi":"Mostra"} il viaggio di Paride</button><button class="btn" data-play="luoghi" data-scope="0">Gioca: Trova il luogo</button></div>
+      <div class="mapWrap">${mapSVG({labels:true, route:view.route, sel:view.mapSel})}</div>${info}
+      ${view.route ? `<p class="muted" style="margin:0">Il viaggio di Paride ed Enea: da Troia costeggiano Lesbo, passano Samos, aggirano Delos e arrivano nel Peloponneso, poi risalgono il fiume fino a Sparta. <small>${pg("26–29")}</small></p>` : ""}`;
+  } else {
+    const list = PAROLE.slice().sort((a,b)=>a.w.localeCompare(b.w,"it"));
+    body = `<div class="btnRow"><button class="btn" data-play="parole" data-scope="0">Gioca: Parole difficili</button><span class="muted">Le parole sottolineate nei riassunti si possono toccare.</span></div>
+      <div class="words">${list.map(w=>`<div class="word"><div><b>${esc(w.w)}</b><p>${esc(w.d)}</p><small>${w.caps.map(c=>"Cap. "+CAPS[c-1].rom).join(", ")} · ${pg(w.pag)}</small></div>${spkBtn(w.w+". "+w.d)}</div>`).join("")}</div>`;
+  }
+  app.innerHTML = `<div class="pageHead"><h2>Studia</h2><p>Prima di giocare, guarda le famiglie, i luoghi e le parole difficili.</p></div>
+    <div class="sub">${subs.map(([k,l])=>`<button data-st="${k}" aria-current="${st===k}">${l}</button>`).join("")}</div>${body}`;
+}
+function linkWords(t){
+  let h = esc(t);
+  PAROLE.forEach(w=>{
+    for(const f of w.forme){
+      const low = h.toLowerCase(), fl = f.toLowerCase();
+      let from = 0, idx = -1;
+      while(true){
+        const i = low.indexOf(fl, from); if(i<0) break;
+        const b = h[i-1]||" ", a = h[i+f.length]||" ";
+        const inTag = h.lastIndexOf("<", i) > h.lastIndexOf(">", i) || h.lastIndexOf("<button", i) > h.lastIndexOf("</button>", i);
+        if(!/\p{L}/u.test(b) && !/\p{L}/u.test(a) && !inTag){ idx=i; break; }
+        from = i+1;
+      }
+      if(idx>=0){ h = h.slice(0,idx)+`<button class="gw" data-gw="${w.id}">${h.substr(idx,f.length)}</button>`+h.slice(idx+f.length); break; }
+    }
+  });
+  return h;
+}
+function showWord(id){
+  const w = PAROLE.find(x=>x.id===id); if(!w) return;
+  document.getElementById("pop").innerHTML = `<div class="pop" role="dialog" aria-label="${esc(w.w)}"><div><b>${esc(w.w)}</b><p>${esc(w.d)}</p></div>${spkBtn(w.w+". "+w.d)}<button class="x" data-popx aria-label="Chiudi">×</button></div>`;
+}
+
+/* ============ SFIDA A DUE (stesse domande, chi arriva prima vince) ============
+   Le mosse passano da ntfy.sh, un servizio gratuito di messaggi: ogni sfida è un "canale" con il suo codice.
+   ntfy non conserva lo storico: chi entra manda "hello" e chi ha creato la sfida risponde con "sync".
+   Funziona dalla versione pubblicata su GitHub; dentro Claude il collegamento esterno è bloccato. */
+const RELAY = "https://ntfy.sh/";
+const IN_CLAUDE = !!(window.claude && window.claude.use);
+let DUEL=null, pendingJoin=null, duelMsg="", newCap=0, newTarget=7, duelBusy=false;
+let DEV; try{ DEV=localStorage.getItem("iliade-dev"); if(!DEV){ DEV=Math.random().toString(36).slice(2,10); localStorage.setItem("iliade-dev",DEV); } }catch(e){ DEV=Math.random().toString(36).slice(2,10); }
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+function seeded(str){ let h=1779033703^str.length; for(let i=0;i<str.length;i++){ h=Math.imul(h^str.charCodeAt(i),3432918353); h=h<<13|h>>>19; } return ()=>{ h=Math.imul(h^h>>>16,2246822507); h=Math.imul(h^h>>>13,3266489909); h^=h>>>16; return (h>>>0)/4294967296; }; }
+function seededShuffle(a,seed){ const r=seeded(seed); a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+const topicOf = code => "iliadeteto-k3-" + code;
+const shareLink = code => location.origin + location.pathname + "#sfida" + code;
+
+async function relaySend(code, m){
+  for(let k=0;k<4;k++){
+    try{
+      const r = await fetch(RELAY+topicOf(code), {method:"POST", body:JSON.stringify(m)});
+      if(r.ok) return true;
+      if(r.status===429){ await sleep(5000); continue; }
+      return false;
+    }catch(e){ await sleep(1500); }
+  }
+  return false;
+}
+function duelState(D){ return {...(D.cfg||{}), stato: D.via ? "via" : "attesa", rivincita: D.riv}; }
+function duelHandle(D, m, time){
+  if(DUEL!==D || !m || !m.k) return;
+  if(m.k==="cfg"){ if(!D.cfg) D.cfg=m; }
+  else if(m.k==="p"){
+    D.players[m.nome] = {nome:m.nome, dev:m.dev, punti:m.punti||0};
+    if(m.nome===S.me && m.dev===DEV && (m.punti||0)>D.punti) D.punti=m.punti;
+  }
+  else if(m.k==="via"){
+    if(!D.via){ D.via=true;
+      if(D.joined){ if(Date.now()/1000 - time > 6) D.phase="play"; else duelCountdown(); } }
+  }
+  else if(m.k==="win"){
+    if(!D.winner){ D.winner=m; D.phase="end"; clearTimeout(D.tm); clearInterval(D.cd);
+      if(!D.bonus && m.nome===S.me && S.me==="Teto" && D.joined && Date.now()/1000 - time < 60){ D.bonus=true; S.pts+=30; save(); header(); } }
+  }
+  else if(m.k==="riv"){ D.riv=m.code; }
+  else if(m.k==="hello"){
+    if(D.joined && D.cfg && D.cfg.creatore===S.me && m.dev!==DEV)
+      relaySend(D.code, {k:"sync", cfg:D.cfg, players:D.players, via:D.via, winner:D.winner, riv:D.riv});
+  }
+  else if(m.k==="sync"){
+    if(!D.cfg) D.cfg=m.cfg;
+    Object.values(m.players||{}).forEach(p=>{ if(p && p.nome && !(p.nome===S.me && p.dev===DEV)) D.players[p.nome]=p; });
+    if(m.via) D.via=true;
+    if(m.winner && !D.winner){ D.winner=m.winner; if(D.joined) D.phase="end"; }
+    if(m.riv) D.riv=m.riv;
+  }
+  D.doc = duelState(D);
+  if(D.joined) duelRerender();
+}
+function duelListen(D){
+  return new Promise(resolve=>{
+    let done=false; const finish=()=>{ if(!done){ done=true; resolve(); } };
+    try{
+      const es = new EventSource(RELAY+topicOf(D.code)+"/sse");
+      D.es = es;
+      es.onmessage = e=>{
+        let ev; try{ ev=JSON.parse(e.data); }catch(x){ return; }
+        if(ev.event==="open"){ finish(); return; }
+        if(ev.event!=="message" || D.seen.has(ev.id)) return;
+        D.seen.add(ev.id);
+        let m; try{ m=JSON.parse(ev.message); }catch(x){ return; }
+        duelHandle(D, m, ev.time||0);
+      };
+      es.onerror = ()=>{ setTimeout(finish, 3000); };
+    }catch(e){ finish(); }
+    setTimeout(finish, 6000);
+  });
+}
+function duelRerender(){ if(view.tab==="sfida" && !G_STATE) render(); }
+function duelLeave(){ if(DUEL){ try{ DUEL.es && DUEL.es.close(); }catch(e){} clearTimeout(DUEL.tm); clearInterval(DUEL.cd); } DUEL=null; }
+function newDuel(code){ return {code, cfg:null, players:{}, via:false, winner:null, riv:null, seen:new Set(), joined:false, phase:"lobby", punti:0, i:0, picked:[], wrongOnce:false, lock:false, reveal:false, bonus:false, doc:{}}; }
+
+async function duelCreate(){
+  if(IN_CLAUDE || !S.me || duelBusy) return;
+  duelBusy=true; duelMsg=""; render();
+  const A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let code=""; for(let i=0;i<4;i++) code+=A[Math.floor(Math.random()*A.length)];
+  const pool = QS.map((q,i)=>i).filter(i=>!newCap || QS[i].cap===newCap);
+  const cfg = {k:"cfg", cap:newCap, target:newTarget, qs:seededShuffle(pool, code), creatore:S.me};
+  duelLeave();
+  const D = newDuel(code); DUEL = D;
+  D.cfg = cfg; D.players[S.me]={nome:S.me, dev:DEV, punti:0}; D.joined=true; D.doc=duelState(D);
+  await duelListen(D);
+  const ok = await relaySend(code, {k:"p", nome:S.me, dev:DEV, punti:0});
+  duelBusy=false;
+  if(!ok || DUEL!==D){ duelLeave(); duelMsg="Non riesco a creare la sfida: controlla di essere collegato a internet e riprova."; return duelRerender(); }
+  view.tab="sfida"; render();
+  return code;
+}
+async function duelEnter(code){
+  if(IN_CLAUDE || !S.me) return;
+  code = code.toUpperCase(); pendingJoin=null; duelMsg="Mi collego alla sfida "+code+"…";
+  duelLeave();
+  const D = newDuel(code); DUEL = D; render();
+  await duelListen(D);
+  if(DUEL!==D) return;
+  relaySend(code, {k:"hello", nome:S.me, dev:DEV});
+  for(let t=0; t<16 && !D.cfg && DUEL===D; t++) await sleep(500);
+  if(DUEL!==D) return;
+  if(!D.cfg){ DUEL=null; try{D.es.close();}catch(e){} duelMsg=`Non trovo la sfida ${code}. Controlla il codice e che chi l'ha creata abbia ancora la sfida aperta.`; return duelRerender(); }
+  const mine = D.players[S.me];
+  if(mine && mine.dev!==DEV && !D.via){ DUEL=null; try{D.es.close();}catch(e){} duelMsg=`${S.me} è già in questa sfida su un altro dispositivo. Scegli un altro nome.`; return duelRerender(); }
+  if(D.via && !(mine && mine.dev===DEV)){ DUEL=null; try{D.es.close();}catch(e){} duelMsg="Questa sfida è già cominciata. Chiedi di farne una nuova!"; return duelRerender(); }
+  if(!mine){ D.players[S.me]={nome:S.me, dev:DEV, punti:0}; relaySend(code, {k:"p", nome:S.me, dev:DEV, punti:0}); }
+  D.joined=true; duelMsg="";
+  if(D.winner) D.phase="end"; else if(D.via) D.phase="play";
+  D.doc=duelState(D);
+  view.tab="sfida"; render();
+}
+function duelCountdown(){
+  const D=DUEL; D.phase="count"; D.cdEnd=Date.now()+3000;
+  D.cd = setInterval(()=>{ if(DUEL!==D) return clearInterval(D.cd); if(Date.now()>=D.cdEnd){ clearInterval(D.cd); if(D.phase==="count") D.phase="play"; } duelRerender(); }, 250);
+}
+function duelQ(){ const D=DUEL, qs=D.cfg.qs||[]; const qi = qs[D.i % qs.length]; const q=QS[qi]; const labels = seededShuffle(q.o, D.code+":"+D.i); return {q, labels, okIdx:labels.indexOf(q.o[0])}; }
+function duelAnswer(k){
+  const D=DUEL; if(!D || D.phase!=="play" || D.lock) return;
+  const {okIdx} = duelQ();
+  if(k===okIdx){
+    D.punti++; D.i++; D.picked=[]; D.wrongOnce=false; D.flash="Giusto!";
+    D.players[S.me]={nome:S.me, dev:DEV, punti:D.punti};
+    if(S.me==="Teto"){ S.pts+=5; save(); }
+    relaySend(D.code, {k:"p", nome:S.me, dev:DEV, punti:D.punti});
+    if(D.punti >= D.cfg.target) relaySend(D.code, {k:"win", nome:S.me, punti:D.punti});
+    return render();
+  }
+  D.picked.push(k);
+  if(!D.wrongOnce){
+    D.wrongOnce=true; D.lock=true; D.flash="Sbagliato: 2 secondi di penalità, poi riprova!";
+    render(); D.tm=setTimeout(()=>{ if(DUEL!==D) return; D.lock=false; D.flash=""; duelRerender(); }, 2000);
+  } else {
+    D.lock=true; D.reveal=true; D.flash="Niente punto: si passa alla prossima.";
+    render(); D.tm=setTimeout(()=>{ if(DUEL!==D) return; D.lock=false; D.reveal=false; D.picked=[]; D.wrongOnce=false; D.i++; D.flash=""; duelRerender(); }, 1800);
+  }
+}
+async function duelRematch(){
+  const D=DUEL; if(!D) return;
+  if(D.riv) return duelEnter(D.riv);
+  newCap=D.cfg.cap; newTarget=D.cfg.target;
+  const old=D.code;
+  const code = await duelCreate();
+  if(code) relaySend(old, {k:"riv", code});
+}
+function duelGo(){ const D=DUEL; if(D && Object.keys(D.players).length>=2 && !D.via) relaySend(D.code, {k:"via"}); }
+function racersHTML(){
+  const D=DUEL, t=D.cfg.target;
+  const names = PLAYERS.filter(n=>D.players[n]);
+  return `<div class="racers">${names.map(n=>{ const p=D.players[n]; const v = n===S.me ? D.punti : (p.punti||0);
+    return `<div class="racer ${n===S.me?"me":""}"><b>${esc(n)}</b><div class="bar"><i style="width:${Math.min(100,v/t*100)}%"></i></div><span class="n">${v}/${t}</span></div>`; }).join("")}</div>`;
+}
+function renderDuel(){
+  const head = `<div class="pageHead"><h2>Sfida a due</h2><p>Stesse domande per tutti: vince chi arriva per primo al numero di risposte giuste.</p></div>`;
+  if(IN_CLAUDE){
+    app.innerHTML = head + elmoSay(GH_URL ? `Le sfide a due si giocano dalla versione dell'app su internet, che funziona per tutti anche senza Claude: <b>${esc(GH_URL)}</b>` : "Le sfide a due si giocano dalla versione dell'app pubblicata su GitHub, che funziona per tutti anche senza Claude.");
+    return;
+  }
+  const who = `<section class="panel"><h3>Chi sei su questo dispositivo?</h3><div class="who3">${PLAYERS.map(n=>`<button data-me="${n}" aria-pressed="${S.me===n}">${n}</button>`).join("")}</div></section>`;
+  const msg = duelMsg ? `<div class="expl ${/Mi collego/.test(duelMsg)?"":"ko"}">${esc(duelMsg)}</div>` : "";
+  if(!DUEL || !DUEL.joined){
+    if(pendingJoin){
+      app.innerHTML = head + elmoSay(`Sei stato invitato alla sfida ${pendingJoin}! Dimmi chi sei e si parte.`, "wow") + who + msg +
+        (S.me ? `<div class="btnRow"><button class="btn" data-djoin="${pendingJoin}">Entra nella sfida</button></div>` : "");
+      return;
+    }
+    app.innerHTML = head + who + msg + `
+      <section class="panel"><h3>Crea una sfida</h3>
+        <div class="setRow"><p>Capitolo</p><div class="seg">${[[1,"I"],[2,"II"],[0,"Misto"]].map(([c,l])=>`<button data-dcap="${c}" aria-pressed="${newCap===c}">${l}</button>`).join("")}</div></div>
+        <div class="setRow"><p>Vince chi arriva a<small>risposte giuste</small></p><div class="seg">${[5,7,10].map(n=>`<button data-dtarget="${n}" aria-pressed="${newTarget===n}">${n}</button>`).join("")}</div></div>
+        <div class="btnRow"><button class="btn" data-dcreate ${S.me && !duelBusy?"":"disabled"}>${!S.me?"Prima dimmi chi sei":duelBusy?"Creo la sfida…":"Crea la sfida"}</button></div>
+      </section>
+      <section class="panel"><h3>Hai un codice?</h3>
+        <div class="btnRow"><input class="codeIn" id="codeIn" maxlength="4" autocomplete="off" autocapitalize="characters" aria-label="Codice della sfida"><button class="btn dark" data-djoin ${S.me?"":"disabled"}>Entra</button></div>
+      </section>
+      ${elmoSay("Come funziona: tutti ricevono le stesse domande nello stesso ordine. Se sbagli, stai fermo 2 secondi e poi riprovi. Se sbagli di nuovo, passi alla domanda dopo senza punto.")}`;
+    return;
+  }
+  const D=DUEL, d=D.cfg, invite = shareLink(D.code);
+  const inviteMsg = `Sfida all'Iliade! Codice: ${D.code}. Apri L'Iliade di Teto, vai su "Sfida a due" e scrivi il codice in "Hai un codice?". Oppure tocca qui: ${invite}`;
+  const exit = `<button class="back" data-dexit>${svg(UI.back)}Esci dalla sfida</button>`;
+  const info = `${capName(d.cap)} · vince chi arriva a ${d.target}`;
+  if(D.phase==="lobby"){
+    const n = Object.keys(D.players).length, creator = d.creatore===S.me;
+    app.innerHTML = exit + `<section class="panel" style="text-align:center"><span class="muted">Codice della sfida</span><div class="code">${D.code}</div><span class="muted">${info}</span></section>
+      <section class="panel"><h3>Invita chi vuoi sfidare</h3><p class="muted" style="margin:0">Di' il codice <b>${D.code}</b> a chi vuoi sfidare: lo scrive in "Hai un codice?" e tocca Entra. Oppure copia l'invito e mandalo su WhatsApp: toccando il link si entra direttamente nella sfida.</p>
+        <div class="linkBox"><input id="inviteLink" readonly value="${esc(inviteMsg)}" aria-label="Invito alla sfida"><button class="btn dark" data-copy="${esc(inviteMsg)}">${svg(UI.copia).replace('<svg ','<svg style="width:18px;height:18px;vertical-align:-3px;margin-right:6px" ')}Copia l'invito</button></div>
+      </section>
+      <section class="panel"><h3>Chi c'è</h3>${racersHTML()}
+        ${creator ? `<div class="btnRow"><button class="btn" data-dgo ${n<2?"disabled":""}>${n<2?"Aspetto almeno un avversario…":"Via!"}</button></div>` : `<p class="muted" style="margin:0">Aspetta che ${esc(d.creatore)} dia il via.</p>`}
+      </section>${msg}`;
+    return;
+  }
+  if(D.phase==="count"){
+    const s = Math.max(1, Math.ceil((D.cdEnd-Date.now())/1000));
+    app.innerHTML = `<section class="play end"><span class="muted">${info}</span><div class="bigWin" style="font-size:96px">${s}</div>${racersHTML()}</section>`;
+    return;
+  }
+  if(D.phase==="end"){
+    const w = D.winner.nome, me = w===S.me;
+    app.innerHTML = exit + `<section class="play end">
+      <div class="bigWin">${me ? "Hai vinto!" : `Ha vinto ${esc(w)}!`}</div>
+      ${me && S.me==="Teto" && D.bonus ? `<div class="promo">+30 punti bonus per la vittoria!</div>` : ""}
+      ${racersHTML()}
+      <div class="btnRow" style="justify-content:center"><button class="btn" data-drematch>${D.riv?"Entra nella rivincita":"Rivincita!"}</button><button class="btn ghost" data-dexit>Esci</button></div>
+    </section>${elmoSay(me ? "Che velocità! Sei un vero eroe." : "Bella gara! Con la rivincita puoi farcela.", me?"wow":"ok")}`;
+    return;
+  }
+  const {q,labels,okIdx} = duelQ();
+  app.innerHTML = exit + `<section class="play">${racersHTML()}
+      <div class="qrow"><div class="q">${esc(q.q)}</div>${spkBtn(q.q+" "+labels.join(", "))}</div>
+      <div class="opts">${labels.map((l,k)=>{
+        const cls = D.picked.includes(k) ? "ko" : (D.reveal && k===okIdx ? "ok" : "");
+        return `<button class="opt ${cls}" data-dopt="${k}" ${D.lock||D.picked.includes(k)?"disabled":""}>${esc(l)}</button>`; }).join("")}</div>
+      ${D.flash ? `<div class="expl ${D.flash==="Giusto!"?"ok":"ko"}">${esc(D.flash)}</div>` : ""}
+    </section>`;
+}
+function checkHash(){
+  const m = (location.hash||"").match(/^#sfida([A-Za-z0-9]{4})$/);
+  if(!m) return;
+  pendingJoin = m[1].toUpperCase();
+  G_STATE=null; view.tab="sfida"; render();
+  if(S.me && !IN_CLAUDE && (!DUEL || DUEL.code!==pendingJoin)) duelEnter(pendingJoin);
+}
+window.addEventListener("hashchange", checkHash);
+
+/* ============ EVENTI ============ */
+document.addEventListener("click", e=>{
+  const t = e.target.closest("button, .sheet, [data-mp]"); if(!t) return;
+  const d = t.dataset;
+  if(d.say!==undefined){ e.stopPropagation(); return speak(d.say); }
+  if(t.classList.contains("sheet") && e.target!==t) return;
+  if(d.close!==undefined){ document.getElementById("sheet").innerHTML=""; return; }
+  if(d.popx!==undefined){ document.getElementById("pop").innerHTML=""; return; }
+  if(d.gw){ return showWord(d.gw); }
+  if(d.card){ return openCard(d.card); }
+  if(d.mp){
+    if(G_STATE && G_STATE.type==="luoghi"){ const g=G_STATE; if(g.answered || g.picked.includes(d.mp)) return; g.picked.push(d.mp); return answer(d.mp===g.items[g.i].m.id); }
+    view.mapSel = d.mp; return render();
+  }
+  if(d.tab){ confirmReset=false; return go({tab:d.tab, cap:null}); }
+  if(d.cap!==undefined){ return go({tab:"cap", cap:+d.cap, sub:+d.cap?"riassunto":"giochi"}); }
+  if(d.home!==undefined){ return go({cap:null}); }
+  if(d.sub){ return go({sub:d.sub}); }
+  if(d.st){ view.st=d.st; return render(); }
+  if(d.route!==undefined){ view.route=!view.route; return render(); }
+  if(d.filt){ filt=d.filt; return render(); }
+  if(d.play){ return startGame(d.play, d.scope!==undefined ? {cap:+d.scope} : {}); }
+  if(d.quest!==undefined){ G_STATE=null; return startGame(CH.type, {cap:CH.cap, n:CH.n, sfida:CH}); }
+  if(d.quit!==undefined || d.backcap!==undefined){ const g=G_STATE; if(g && (g.sfida || g.type==="errori")) return go({tab:"cap", cap:null}); if(view.tab!=="cap" || view.cap===null) return go({}); return go({sub:"giochi"}); }
+  if(d.again!==undefined){ const g=G_STATE; G_STATE=null; return startGame(g.type, {cap:g.cap}); }
+  if(d.next!==undefined){ return nextItem(); }
+  if(d.clue!==undefined){ const it=G_STATE.items[G_STATE.i]; if(it.clue<3){ it.clue++; render(); } return; }
+  if(d.opt!==undefined){
+    const g=G_STATE, k=+d.opt; if(g.answered) return; g.picked.push(k);
+    return answer(k===g.items[g.i].okIdx);
+  }
+  if(d.bin){ const g=G_STATE; if(g.answered) return; g.picked.push(d.bin); return answer(d.bin===g.items[g.i].p.sq); }
+  if(d.l){ return matchTap("l", d.l); }
+  if(d.r){ return matchTap("r", d.r); }
+  if(d.set){ S.set[d.set]=!S.set[d.set]; save(); return render(); }
+  if(d.sec){ S.set.sec=+d.sec; save(); return render(); }
+  if(d.reset==="ask"){ confirmReset=true; return render(); }
+  if(d.reset==="no"){ confirmReset=false; return render(); }
+  if(d.reset==="yes"){ const me=S.me; S=JSON.parse(JSON.stringify(DEF)); S.me=me; save(); confirmReset=false; return go({tab:"prog"}); }
+  /* sfida a due */
+  if(d.me){ S.me=d.me; duelMsg=""; save(); render(); if(pendingJoin && !IN_CLAUDE && !DUEL) duelEnter(pendingJoin); return; }
+  if(d.dcap!==undefined){ newCap=+d.dcap; return render(); }
+  if(d.dtarget){ newTarget=+d.dtarget; return render(); }
+  if(d.dcreate!==undefined){ return duelCreate(); }
+  if(d.djoin!==undefined){ const c = d.djoin || (document.getElementById("codeIn")||{}).value || ""; if(!/^[A-Za-z0-9]{4}$/.test(c.trim())){ duelMsg="Il codice ha 4 caratteri, per esempio K7QM."; return render(); } return duelEnter(c.trim()); }
+  if(d.dgo!==undefined){ return duelGo(); }
+  if(d.dopt!==undefined){ return duelAnswer(+d.dopt); }
+  if(d.drematch!==undefined){ return duelRematch(); }
+  if(d.dexit!==undefined){ duelLeave(); pendingJoin=null; try{ history.replaceState(null,"",location.pathname+location.search); }catch(e){} return render(); }
+  if(d.copy){
+    const txt=d.copy, done=()=>{ t.textContent="Invito copiato!"; };
+    try{ navigator.clipboard.writeText(txt).then(done).catch(()=>{ const i=document.getElementById("inviteLink"); if(i){ i.focus(); i.select(); } t.textContent="Seleziona e copia il testo"; }); }
+    catch(err){ const i=document.getElementById("inviteLink"); if(i){ i.focus(); i.select(); } }
+    return;
+  }
+});
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ document.getElementById("sheet").innerHTML=""; document.getElementById("pop").innerHTML=""; } if(e.key==="Enter" && e.target.id==="codeIn"){ const b=document.querySelector("[data-djoin]"); if(b) b.click(); } });
+
+render();
+checkHash();
+
+</script>
+</body>
+</html>
